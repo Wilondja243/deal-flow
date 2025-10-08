@@ -19,8 +19,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+
+    'corsheaders',
+
     'dealflow.app.core',
     'dealflow.app.users',
+    
 ]
 
 MIDDLEWARE = [
