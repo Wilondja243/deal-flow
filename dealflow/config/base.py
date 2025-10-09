@@ -24,6 +24,7 @@ INSTALLED_APPS = [
 
     'dealflow.app.core',
     'dealflow.app.users',
+    'dealflow.app.crm',
     
 ]
 
