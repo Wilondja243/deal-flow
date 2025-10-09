@@ -54,13 +54,14 @@ class Opportunity(BaseModel):
     pipeline = models.ForeignKey(Pipeline, on_delete=models.CASCADE)
     deal_name = models.CharField(max_length=100)
     estimate_value = models.DecimalField(max_digits=8, decimal_places=2)
-    cloture_data = models.DateTimeField(null=True, blank=True)
+    cloture_date = models.DateTimeField(null=True, blank=True)
+    probability_purcent = models.CharField(max_length=20, default="")
 
 
 class Activity(BaseModel):
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    Prospect = models.ForeignKey(Prospect, on_delete=models.CASCADE)
+    prospect = models.ForeignKey(Prospect, on_delete=models.CASCADE)
     opportunity = models.ForeignKey(Opportunity, on_delete=models.CASCADE)
     activity_type = models.CharField(max_length=50)
     description_note = models.TextField()

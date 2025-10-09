@@ -1,0 +1,41 @@
+:root {
+    --bs-primary: #007bff;
+    --bs-primary-hover: #0067d4;
+    --bs-secondary: #6c757d;
+    --bs-background: #f4f7f6;
+    --bs-card: #ffffff;
+    --bs-text: #333333;
+    --bs-text-muted: #92929225;
+    --left-bar-width: 250px;
+}
+
+body {
+    margin: 0;
+    font-family: sans-serif;
+    background-color: var(--bs-background);
+    color: var(--bs-text);
+}
+
+.btn{
+    border-radius: 5px;
+    font-weight: 700;
+    padding: 13px 5px;
+    border: none;
+    background-color: var(--bs-primary);
+    cursor: pointer;
+}
+.btn:hover{
+    background: var(--bs-primary-hover);
+}
+
+.app-container {
+    display: flex;
+    height: 100vh;
+}
+
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}

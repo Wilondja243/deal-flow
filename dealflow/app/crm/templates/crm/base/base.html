@@ -1,0 +1,27 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'images/font/bootstrap-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'stylesheet/global.css' %}">
+    <title>DealFlow CRM Dashboard</title>
+</head>
+<body>
+
+    <div class="app-container">
+        {% block side_bar %} {% endblock %}
+
+        <div class="main-content">
+            {% block header %} {% endblock %}
+            {% block content %} {% endblock %}
+        </div>
+    </div>
+
+    <script src="{% static 'JavaScript/chart.umd.min.js' %}"></script>
+    <script src="{% static 'JavaScript/script.js' %}"></script>
+
+</body>
+</html>
