@@ -13,7 +13,7 @@
 {% block content %}
 
 <section class="dashboard-body">
-    <h1>Vue d'Ensemble Commerciale</h1>
+    <h1><i class="bi bi-grid-fill"></i>Dashboard</h1>
     
     <div class="kpi-cards">
         
@@ -46,19 +46,17 @@
     <div class="dashboard-visuals">
         
         <div class="card chart-card pipeline-chart-container">
-            <h2>Pipeline de Vente Actif</h2>
+            <h2>Activités</h2>
             <div class="chart-placeholder">
                 <canvas id="pipelineChart"></canvas>
             </div>
         </div>
 
-        <div class="card list-card todo-list-container">
-            <h2>Prochaines Actions (Priorité)</h2>
-            <ul class="task-list">
-                <li>Appel : Mme Martin (Alpha S.A.) - Aujourd'hui 10:00</li>
-                <li>Email : Envoyer Propale à Beta Corp - Aujourd'hui 14:00</li>
-                <li>Tâche : Relancer l'Admin pour contrat - Demain</li>
-            </ul>
+        <div class="card chart-card todo-list-container">
+            <h2>Pipeline de Vente Actif</h2>
+            <div class="chart-placeholder">
+                <canvas id="activityChart"></canvas>
+            </div>
         </div>
 
     </div>

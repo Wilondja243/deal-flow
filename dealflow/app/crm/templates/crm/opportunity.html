@@ -1,0 +1,111 @@
+{% extends "./base/base.html" %}
+
+
+{% block side_bar %}
+    {% include "./base/side_bar.html" %}
+{% endblock %}
+
+{% block header %}
+    {% include "./base/header.html" %}
+{% endblock %}
+
+
+{% block content %}
+
+<div class="opportunities-wrapper">
+    <h1><i class="bi bi-cash-stack"></i> Vue d'Ensemble du Pipeline</h1>
+
+    <header class="pipeline-header-actions">
+        
+        <div class="filters">
+            <select class="form-select">
+                <option selected>Commercial : Moi</option>
+                <option>Commercial : Pierre</option>
+                <option>Commercial : Sophie</option>
+            </select>
+            
+            <select class="form-select">
+                <option selected>Statut : Ouvertes</option>
+                <option>Statut : Gagnées</option>
+                <option>Statut : Perdues</option>
+            </select>
+            
+            <button class="btn btn-secondary">
+                <i class="bi bi-table"></i> Vue Liste
+            </button>
+        </div>
+        
+        <div class="actions">
+            <button class="btn btn-primary new-opportunity-btn">
+                <i class="bi bi-plus"></i> Nouvelle Opportunité
+            </button>
+        </div>
+    </header>
+
+    <div class="pipeline-container">
+        
+        <div class="pipeline-column" data-stage-id="1">
+            <h3 class="column-title">Qualification</h3>
+            <div class="column-summary">Total: <strong>45 000 €</strong></div>
+            
+            <div class="opportunity-card qualification" data-opportunity-id="101">
+                <a href="#" class="deal-name">Mise en place Alpha Corp</a>
+                <p class="deal-value">15 000 €</p>
+                <p class="deal-account"><i class="bi bi-building"></i> Alpha Corp</p>
+                <p class="deal-date"><i class="bi bi-calendar-check"></i> Clôture : 20/10/2025</p>
+                <span class="activity-warning"><i class="bi bi-exclamation-triangle-fill"></i> **Risque d'inactivité**</span>
+            </div>
+
+            <div class="opportunity-card qualification" data-opportunity-id="102">
+                <a href="#" class="deal-name">Achat licences Beta IT</a>
+                <p class="deal-value">30 000 €</p>
+                <p class="deal-account"><i class="bi bi-building"></i> Beta IT Services</p>
+                <p class="deal-date"><i class="bi bi-calendar-check"></i> Clôture : 28/10/2025</p>
+            </div>
+        </div>
+        
+        <div class="pipeline-column" data-stage-id="2">
+            <h3 class="column-title">Proposition</h3>
+            <div class="column-summary">Total: <strong>65 000 €</strong></div>
+            
+                <div class="opportunity-card proposal" data-opportunity-id="201">
+                <a href="#" class="deal-name">Renouvellement Contrat ZETA</a>
+                <p class="deal-value">40 000 €</p>
+                <p class="deal-account"><i class="bi bi-building"></i> ZETA Inc.</p>
+                <p class="deal-date"><i class="bi bi-calendar-check"></i> Clôture : 05/11/2025</p>
+            </div>
+            
+                <div class="opportunity-card proposal" data-opportunity-id="202">
+                <a href="#" class="deal-name">Nouveau service AXION</a>
+                <p class="deal-value">25 000 €</p>
+                <p class="deal-account"><i class="bi bi-building"></i> AXION Data</p>
+                <p class="deal-date"><i class="bi bi-calendar-check"></i> Clôture : 15/11/2025</p>
+            </div>
+        </div>
+        
+        <div class="pipeline-column" data-stage-id="3">
+            <h3 class="column-title">Négociation</h3>
+            <div class="column-summary">Total: <strong>50 000 €</strong></div>
+                <div class="opportunity-card negotiation" data-opportunity-id="301">
+                <a href="#" class="deal-name">Intégration Bêta</a>
+                <p class="deal-value">50 000 €</p>
+                <p class="deal-account"><i class="bi bi-building"></i> Bêta Solutions</p>
+                <p class="deal-date"><i class="bi bi-calendar-check"></i> Clôture : 10/11/2025</p>
+            </div>
+        </div>
+        
+        <div class="pipeline-column" data-stage-id="4">
+            <h3 class="column-title">Verbal OK</h3>
+            <div class="column-summary">Total: <strong>75 000 €</strong></div>
+            <div class="opportunity-card verbal-ok" data-opportunity-id="401">
+                <a href="#" class="deal-name">Grand Compte Orion</a>
+                <p class="deal-value">75 000 €</p>
+                <p class="deal-account"><i class="bi bi-building"></i> Groupe Orion</p>
+                <p class="deal-date"><i class="bi bi-calendar-check"></i> Clôture : 01/10/2025</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

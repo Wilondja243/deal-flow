@@ -7,3 +7,10 @@ class DashboardView(View):
 
     def get(self, request):
         return render(request, self.template_name)
+
+
+class OpportunityView(View):
+    template_name = "crm/opportunity.html"
+
+    def get(self, request):
+        return render(request, self.template_name)
