@@ -9,10 +9,10 @@ DEBUG = False
 
 ALLOWED_HOSTS = config("ALLOWED_HOSTS").split(',')
 
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_ALL_ORIGINS = False
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173", 
-    "http://127.0.0.1:5173",
+    "https://dealflow-9wex.onrender.com",
+    "http://127.0.0.1:3000",
 ]
 
 
@@ -40,8 +40,5 @@ SECURE_SSL_REDIRECT = config("SECURE_SSL_REDIRECT")
 SECURE_HSTS_SECONDS = config("SECURE_HSTS_SECONDS", cast = int)
 SECURE_HSTS_PRELOAD = config("SECURE_HSTS_PRELOAD")
 SECURE_HSTS_INCLUDE_SUBDOMAINS = config("SECURE_HSTS_INCLUDE_SUBDOMAINS")
-
-CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOWED_ORIGINS = [ "https://waiteka.onrender.com",]
 
 
