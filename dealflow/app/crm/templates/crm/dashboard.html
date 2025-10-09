@@ -1,0 +1,74 @@
+{% extends "./base/base.html" %}
+
+
+{% block side_bar %}
+    {% include "./base/side_bar.html" %}
+{% endblock %}
+
+{% block header %}
+    {% include "./base/header.html" %}
+{% endblock %}
+
+
+{% block content %}
+
+<section class="dashboard-body">
+    <h1><i class="bi bi-grid-fill"></i>Dashboard</h1>
+    
+    <div class="kpi-cards">
+        
+        <div class="card kpi-card">
+            <span class="card-title">Pipeline Actif</span>
+            <span class="kpi-value">$150,000</span>
+            <span class="kpi-trend">↑ 12% vs Mois Dernier</span>
+        </div>
+
+        <div class="card kpi-card">
+            <span class="card-title">Taux de Conversion</span>
+            <span class="kpi-value">22%</span>
+            <span class="kpi-trend">↓ 3% vs Objectif</span>
+        </div>
+
+        <div class="card kpi-card">
+            <span class="card-title">Tâches à Faire</span>
+            <span class="kpi-value">15</span>
+            <span class="kpi-trend">3 Urgentes Aujourd'hui</span>
+        </div>
+        
+        <div class="card kpi-card">
+            <span class="card-title">Revenu Gagné (Mois)</span>
+            <span class="kpi-value">$35,000</span>
+            <span class="kpi-trend">Objectif atteint à 70%</span>
+        </div>
+
+    </div>
+    
+    <div class="dashboard-visuals">
+        
+        <div class="card chart-card pipeline-chart-container">
+            <h2>Activités</h2>
+            <div class="chart-placeholder">
+                <canvas id="pipelineChart"></canvas>
+            </div>
+        </div>
+
+        <div class="card chart-card todo-list-container">
+            <h2>Pipeline de Vente Actif</h2>
+            <div class="chart-placeholder">
+                <canvas id="activityChart"></canvas>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="dashboard-critical-list">
+        <div class="card table-card">
+            <h2>Affaires à Risque (Deal Rotting)</h2>
+            <p>Opportunités sans activité depuis plus de 7 jours.</p>
+        </div>
+    </div>
+
+</section>
+
+
+{% endblock %}
