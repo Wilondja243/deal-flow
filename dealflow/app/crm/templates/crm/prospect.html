@@ -1,0 +1,89 @@
+{% extends "./base/base.html" %}
+
+
+{% block side_bar %}
+    {% include "./base/side_bar.html" %}
+{% endblock %}
+
+{% block header %}
+    {% include "./base/header.html" %}
+{% endblock %}
+
+
+{% block content %}
+
+<div class="prospect-wrapper">
+    <h1><i class="bi bi-person-rolodex"></i> Prospects</h1>
+
+    <header class="list-header-actions">
+        
+        <div class="search-controls">
+            <input type="text" class="search-input" placeholder="Rechercher par Nom ou Email...">
+            <select class="form-select">
+                <option selected>Filtre : Commercial</option>
+                <option>Commercial : Moi</option>
+            </select>
+        </div>
+
+        <div class="actions">
+            <button class="btn btn-primary new-contact-btn">
+                <i class="bi bi-person-plus-fill"></i> Nouveau Prospect
+            </button>
+        </div>
+    </header>
+
+    <div class="table-container">
+        <table class="prospects-table">
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Poste</th>
+                    <th>Compte</th>
+                    <th>Téléphone</th>
+                    <th>Email</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="col-name">Alice Martin</td>
+                    <td class="col-title">Directrice des Achats</td>
+                    <td><a href="#" style="color: var(--bs-text-green); ">Alpha Corp</a></td>
+                    <td class="col-phone"><a href="tel:+33123456789">+33 1 23 45 67 89</a></td>
+                    <td class="col-email"><a href="mailto:alice.m@alphacorp.com">alice.m@alphacorp.com</a></td>
+                    <td class="col-actions">
+                        <button class="btn action-btn edit" title="Modifier"><i class="bi bi-pencil-square"></i></button>
+                        <button class="btn action-btn delete" title="Supprimer"><i class="bi bi-trash"></i></button>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td class="col-name">Bernard Lemaire</td>
+                    <td class="col-title">Responsable IT</td>
+                    <td><a href="#" style="color: var(--bs-text-green);">Beta IT Services</a></td>
+                    <td class="col-phone">+33 6 98 76 54 32</td>
+                    <td class="col-email"><a href="mailto:b.lemaire@beta-it.fr">b.lemaire@beta-it.fr</a></td>
+                    <td class="col-actions">
+                        <button class="btn action-btn edit"><i class="bi bi-pencil-square"></i></button>
+                        <button class="btn action-btn delete"><i class="bi bi-trash"></i></button>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td class="col-name">Camille Dubois</td>
+                    <td class="col-title">Chef de Projet</td>
+                    <td><a href="#" style="color: var(--bs-text-green);">Groupe Orion</a></td>
+                    <td class="col-phone">N/A</td>
+                    <td class="col-email"><a href="mailto:c.dubois@orion.com">c.dubois@orion.com</a></td>
+                    <td class="col-actions">
+                        <button class="btn action-btn edit"><i class="bi bi-pencil-square"></i></button>
+                        <button class="btn action-btn delete"><i class="bi bi-trash"></i></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+{% endblock %}

@@ -14,3 +14,17 @@ class OpportunityView(View):
 
     def get(self, request):
         return render(request, self.template_name)
+
+
+class ProspectView(View):
+    template_name = "crm/prospect.html"
+
+    def get(self, request):
+        return render(request, self.template_name)
+    
+
+class ProductView(View):
+    template_name = "crm/product.html"
+
+    def get(self, request):
+        return render(request, self.template_name)
