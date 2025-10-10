@@ -1,6 +1,11 @@
 @import url('./style.css');
 
 
+.wrapper{
+    padding: 20px;
+}
+
+
 /*########## LEFT BAR ############*/
 
 .left-bar {
@@ -118,12 +123,6 @@
 
 /*########## DASHBOARD BODY ##########*/
 
-.dashboard-body {
-    padding: 30px;
-}
-
-
-/* KPI Cards (Utilisation de CSS Grid) */
 .kpi-cards {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -162,7 +161,7 @@
 
 .kpi-trend {
     font-size: 0.8em;
-    color: green; 
+    color: var(--bs-text-green); 
     margin-top: 10px;
 }
 
@@ -191,7 +190,6 @@
     list-style: none;
     padding: 0;
 }
-
 .task-list li {
     padding: 10px 0;
     border-bottom: 1px solid #eee;
@@ -201,16 +199,17 @@
     margin-bottom: 30px;
 }
 
+.dashboard-critical-list h2{
+    margin-bottom: 15px;
+}
+.dashboard-critical-list p{
+    color: var(--bs-text-muted);
+}
+
 
 /*###########################*\
         OPPORTUNITY
 /*############################*/
-
-
-.opportunities-wrapper {
-    padding: 30px;
-}
-
 
 .form-select {
     padding: 8px 12px;
@@ -234,7 +233,6 @@
     display: flex;
     gap: 15px;
 }
-
 
 .pipeline-container {
     display: grid;
@@ -340,11 +338,6 @@
         PROSPECT
 /*########################*/
 
-.prospect-wrapper {
-    padding: 30px;
-}
-
-
 .prospect-wrapper .list-header-actions {
     display: flex;
     justify-content: space-between;
@@ -366,58 +359,15 @@
     border-radius: 5px;
 }
 
-.prospects-table {
-    width: 100%;
-    border-collapse: separate;
-    border-spacing: 0;
-    background-color: var(--bs-card);
-    border: 1px solid var(--bs-border);
-}
-
-.prospects-table th {
-    text-align: left;
-    padding: 15px;
-    background: var(--bs-bg) ;
-    color: var(--primary-color);
-    font-weight: 700;
-    cursor: pointer;
-    position: sticky;
-    top: 0;
-    border-bottom: 1px solid var(--bs-border);
-}
-
 .prospects-table th i.bi-sort-alpha-down {
     margin-left: 5px;
     font-size: 0.8em;
     color: var(--bs-text-muted);
 }
 
-.prospects-table td {
-    padding: 15px;
-    border-bottom: 1px solid var(--bs-border);
-    transition: background-color 0.3s;
-}
-.prospects-table td a, .prospects-table td{
-    color: var(--bs-text-muted);
-    text-decoration: none;
-}
-
-.prospects-table tbody tr:hover {
-    background-color: #1c1c1d;
-}
-
-.prospects-table tbody tr:last-child td {
-    border-bottom: none;
-}
-
 .col-actions {
     display: flex;
     gap: 10px;
-}
-.action-btn {
-    background: none;
-    border: none;
-    padding: 0;
 }
 
 
@@ -430,10 +380,6 @@
 /*#########################*\
         PRODUCTS
 /*##########################*/
-
-.products-wrapper {
-    padding: 30px;
-}
 
 .products-wrapper .search-input {
     border-radius: 5px;
@@ -535,7 +481,106 @@
     transition: color 0.2s;
 }
 
-
 /*#########################*\
         END PRODUCTS
+/*##########################*/
+
+
+
+/*#########################*\
+        ACCOUNT
+/*##########################*/
+
+.kpi-grid {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.kpi-card {
+    flex: 1;
+    background-color: var(--bs-card);
+    border-radius: 5;
+    box-shadow: var(--shadow);
+    padding: 25px;
+    border: 1px solid var(--bs-border);
+}
+
+.kpi-title {
+    font-size: 0.9em;
+    color: var(--bs-text);
+    margin-bottom: 10px;
+}
+
+.kpi-value {
+    font-size: 2em;
+    font-weight: bold;
+    color: var(--bs-text);
+}
+
+.kpi-card.risk .kpi-value {
+    color: var(--bs-text-red);
+}
+
+.kpi-trend {
+    font-size: 0.8em;
+    color: var(--bs-text-green);
+    margin-top: 10px;
+}
+
+.list-header-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.table-container {
+    border-radius: 5px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+}
+
+/*#########################*\
+        END ACCOUNT
+/*##########################*/
+
+
+
+/*#########################*\
+        ACTIVITY
+/*##########################*/
+
+.activity-type-icon {
+    font-size: 1.2em;
+    margin-right: 5px;
+}
+
+.col-type{text-wrap: nowrap;}
+.type-call { color: var(--call-color); }
+.type-task { color: var(--task-color); }
+.type-email { color: var(--email-color); }
+
+.status-badge {
+    font-size: 0.8em;
+    padding: 5px 10px;
+    border-radius: 4px;
+    text-wrap: nowrap;
+}
+.status-completed {
+    background-color: rgba(72, 224, 106, 0.2); 
+    color: var(--call-color);
+}
+.status-pending {
+    background-color: rgba(246, 173, 85, 0.2); 
+    color: var(--task-color);
+}
+
+/* Actions */
+.col-actions {
+    text-align: center;
+}
+
+/*#########################*\
+        END ACTIVITY
 /*##########################*/

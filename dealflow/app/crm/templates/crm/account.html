@@ -1,0 +1,111 @@
+{% extends "./base/base.html" %}
+
+
+{% block side_bar %}
+    {% include "./base/side_bar.html" %}
+{% endblock %}
+
+{% block header %}
+    {% include "./base/header.html" %}
+{% endblock %}
+
+
+{% block content %}
+
+
+<div class="wrapper">
+    <h1><i class="bi bi-building"></i> Gestion des Comptes Clients</h1>
+
+    <div class="kpi-grid">
+        
+        <div class="kpi-card">
+            <p class="kpi-title">Valeur Totale du Pipeline</p>
+            <p class="kpi-value">225 000 €</p>
+            <p class="kpi-trend"><i class="bi bi-graph-up"></i> +15% vs Mois Dernier</p>
+        </div>
+        
+        <div class="kpi-card">
+            <p class="kpi-title">Compte Total</p>
+            <p class="kpi-value">12</p>
+            <p class="kpi-trend"><i class="bi bi-check2-circle"></i> Objectif atteint à 80%</p>
+        </div>
+        
+        <div class="kpi-card risk">
+            <p class="kpi-title">Comptes Sans Activité</p>
+            <p class="kpi-value">7</p>
+            <p class="kpi-trend"><i class="bi bi-exclamation-triangle-fill"></i> N'ont pas été contactés depuis 30 jours</p>
+        </div>
+        
+    </div>
+    
+    <header class="list-header-actions">
+        
+        <div class="search-controls">
+            <input type="text" class="search-input" placeholder="Rechercher par Nom d'Entreprise...">
+        </div>
+
+        <div class="actions">
+            <button class="btn btn-primary new-account-btn">
+                <i class="bi bi-building-add"></i> Nouveau Compte
+            </button>
+        </div>
+    </header>
+
+    <div class="table-container">
+        <table class="accounts-table">
+            <thead>
+                <tr>
+                    <th>Nom de l'Entreprise</th>
+                    <th>Ville</th>
+                    <th>Contact Principal</th>
+                    <th>Téléphone</th>
+                    <th>Pipeline Actif</th>
+                    <th>Statut</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="col-name">Alpha Corp Solutions</td>
+                    <td>Kinshasa</td>
+                    <td class="col-contact">Martin Bakole</td>
+                    <td class="col-phone">+243 82 045 67 89</td>
+                    <td class="col-pipeline-value">65 000 €</td>
+                    <td class="col-status"><span style="color: var(--bs-text-green);"><i class="bi bi-arrow-up-circle-fill"></i> Actif</span></td>
+                    <td class="col-actions">
+                        <button class="btn action-btn edit" title="Voir Fiche"><i class="bi bi-box-arrow-in-up-right"></i></button>
+                        <button class="btn action-btn" title="Ajouter Affaire"><i class="bi bi-plus-circle"></i></button>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td class="col-name">ZETA Technologies Inc.</td>
+                    <td>Bujumbura</td>
+                    <td class="col-contact">Irakoze Josué</td>
+                    <td>+257 12 34 56 78</td>
+                    <td class="col-pipeline-value">5 000 €</td>
+                    <td class="col-status"><span style="color: var(--bs-text-red);"><i class="bi bi-dash-circle-fill"></i> À Relancer</span></td>
+                    <td class="col-actions">
+                        <button class="btn action-btn edit"><i class="bi bi-box-arrow-in-up-right"></i></button>
+                        <button class="btn action-btn"><i class="bi bi-plus-circle"></i></button>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td class="col-name">Groupe ORION</td>
+                    <td>Nigeria</td>
+                    <td class="col-contact">Igwe okoya</td>
+                    <td>+244 99 88 77 66</td>
+                    <td class="col-pipeline-value">0 €</td>
+                    <td class="col-status"><span style="color: var(--bs-text-green);"><i class="bi bi-check-circle-fill"></i> Client Fidèle</span></td>
+                    <td class="col-actions">
+                        <button class="btn action-btn edit"><i class="bi bi-box-arrow-in-up-right"></i></button>
+                        <button class="btn action-btn"><i class="bi bi-plus-circle"></i></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

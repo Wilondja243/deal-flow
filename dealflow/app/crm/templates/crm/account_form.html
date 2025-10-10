@@ -1,0 +1,70 @@
+{% extends "./base/base.html" %}
+
+
+{% block side_bar %}
+    {% include "./base/side_bar.html" %}
+{% endblock %}
+
+{% block header %}
+    {% include "./base/header.html" %}
+{% endblock %}
+
+
+{% block content %}
+
+<div class="form-container wrapper">
+    <h2 class="form-title"><i class="bi bi-building-add"></i> Créer un Nouveau Compte</h2>
+    
+    <form>
+        <div class="form-row">
+            <div class="form-group">
+                <label for="account-name">Nom de l'Entreprise <span style="color: red;">*</span></label>
+                <input type="text" id="account-name" class="form-control" required placeholder="Ex: Alpha Corp Solutions">
+            </div>
+            <div class="form-group">
+                <label for="account-website">Site Web</label>
+                <input type="url" id="account-website" class="form-control" placeholder="Ex: https://www.alphacorp.com">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="account-phone">Téléphone Principal</label>
+                <input type="tel" id="account-phone" class="form-control" placeholder="Ex: +33 1 23 45 67 89">
+            </div>
+            <div class="form-group">
+                <label for="account-industry">Secteur d'Activité</label>
+                <select id="account-industry" class="form-control">
+                    <option value="">Sélectionner un secteur</option>
+                    <option value="IT">Technologies de l'Information</option>
+                    <option value="Finance">Finance / Assurance</option>
+                    <option value="Manufacturing">Industrie / Fabrication</option>
+                    <option value="Other">Autre...</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="form-row">
+            <div class="form-group">
+                <label for="account-city">Ville</label>
+                <input type="text" id="account-city" class="form-control" placeholder="Ex: Paris">
+            </div>
+            <div class="form-group">
+                <label for="account-zip">Code Postal</label>
+                <input type="text" id="account-zip" class="form-control" placeholder="Ex: 75001">
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="account-notes">Notes / Description du Compte</label>
+            <textarea id="account-notes" class="form-control" rows="7" placeholder="Informations clés sur l'entreprise, historique..."></textarea>
+        </div>
+
+        <div class="form-actions">
+            <button type="button" class="btn btn-secondary"><i class="bi bi-x-lg"></i> Annuler</button>
+            <button type="submit" class="btn btn-primary"><i class="bi bi-floppy"></i> Enregistrer le Compte</button>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

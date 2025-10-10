@@ -1,0 +1,67 @@
+@import url('./style.css');
+
+
+.form-container {
+    width: 90%;
+    margin: 40px;
+    background: var(--bs-card);
+    border-radius: 5px;
+    box-shadow: var(--shadow-modal);
+    padding: 30px;
+    border: 1px solid var(--bs-border);
+}
+
+.form-container .form-title{
+    margin-bottom: 30px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--bs-text);
+    font-size: 0.95em;
+}
+
+.form-control, select.form-control {
+    width: calc(100% - 30px);
+    padding: 10px 15px;
+    border: 1px solid var(--bs-border);
+    border-radius: 5px;
+    background-color: var(--bs-bg);
+    color: var(--text-light);
+    transition: border-color 0.2s;
+    font-size: 1em;
+    -webkit-appearance: none;
+}
+
+.form-control:focus {
+    border-color: var(--border-focus);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 180, 216, 0.3);
+}
+
+.form-row {
+    display: flex;
+    gap: 20px;
+}
+.form-row .form-group {
+    flex: 1;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 30px;
+}
+
+.help-text {
+    font-size: 0.75em;
+    color: #A0AEC0;
+    margin-top: 5px;
+}

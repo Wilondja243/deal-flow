@@ -1,0 +1,104 @@
+{% extends "./base/base.html" %}
+
+
+{% block side_bar %}
+    {% include "./base/side_bar.html" %}
+{% endblock %}
+
+{% block header %}
+    {% include "./base/header.html" %}
+{% endblock %}
+
+
+{% block content %}
+
+
+<div class="activities-wrapper wrapper">
+    <h1><i class="bi bi-calendar3"></i> Historique et Tâches de l'Équipe</h1>
+
+    <header class="list-header-actions">
+        
+        <div class="search-controls">
+            <input type="text" class="search-input" placeholder="Rechercher par description...">
+            
+            <select class="form-select">
+                <option selected>Type : Tous</option>
+                <option>Appel</option>
+                <option>Tâche</option>
+                <option>Email</option>
+            </select>
+            
+            <select class="form-select">
+                <option selected>Statut : À Faire</option>
+                <option>Statut : Terminées</option>
+            </select>
+        </div>
+
+        <div class="actions">
+            <button class="btn btn-primary new-activity-btn">
+                <i class="bi bi-plus-lg"></i> Nouvelle Activité
+            </button>
+        </div>
+    </header>
+
+    <div class="table-container">
+        <table class="activities-table">
+            <thead>
+                <tr>
+                    <th>Date & Heure</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                    <th>Lié à (Affaire/Contact)</th>
+                    <th>Commercial</th>
+                    <th>Statut</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="col-date">15/10/2025 à 10h00</td>
+                    <td class="col-type">
+                        <i class="bi bi-check2-square activity-type-icon type-task"></i> Tâche
+                    </td>
+                    <td>Préparer la proposition pour Alpha Corp.</td>
+                    <td class="col-link"><a href="#">Alpha Corp Solutions</a></td>
+                    <td class="col-owner">Jean Dupont</td>
+                    <td><span class="status-badge status-pending">En Cours</span></td>
+                    <td class="col-actions">
+                        <button class="btn action-btn" title="Marquer Terminé"><i class="bi bi-check-circle"></i></button>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td class="col-date">09/10/2025 à 14h30</td>
+                    <td class="col-type">
+                        <i class="bi bi-telephone-fill activity-type-icon type-call"></i> Appel
+                    </td>
+                    <td>Découverte avec Alice Martin. Budget validé.</td>
+                    <td class="col-link"><a href="#">Alice Martin</a></td>
+                    <td class="col-owner">Jean Dupont</td>
+                    <td><span class="status-badge status-completed">Terminée</span></td>
+                    <td class="col-actions">
+                        <button class="btn action-btn" title="Voir Détails"><i class="bi bi-eye"></i></button>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td class="col-date">20/10/2025 à 16h00</td>
+                    <td class="col-type">
+                        <i class="bi bi-envelope-fill activity-type-icon type-email"></i> Email
+                    </td>
+                    <td>Envoyer le contrat final à l'équipe juridique Orion.</td>
+                    <td class="col-link"><a href="#">Groupe Orion</a></td>
+                    <td class="col-owner">Sophie Dubois</td>
+                    <td><span class="status-badge status-pending">En Cours</span></td>
+                    <td class="col-actions">
+                        <button class="btn action-btn" title="Marquer Terminé"><i class="bi bi-check-circle"></i></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}
