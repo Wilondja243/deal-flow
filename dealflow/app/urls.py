@@ -10,12 +10,13 @@ from dealflow.app.crm.views import (
     AccountView,
     AccountCreateView,
     ActivityView,
+    ActivityCreateView,
 )
 
 
 urlpatterns = [
     path('account/login/', LoginView.as_view(), name="login"),
-    
+
     path('', DashboardView.as_view(), name="dashboard"),
     path('opportunity/', OpportunityView.as_view(), name="opportunity"),
     path('prospect/', ProspectView.as_view(), name="prospect"),
@@ -24,4 +25,5 @@ urlpatterns = [
     path('account/', AccountView.as_view(), name="account"),
     path('account/create/', AccountCreateView.as_view(), name="account_create"),
     path('activity/', ActivityView.as_view(), name="activity"),
+    path('activity/create/', ActivityCreateView.as_view(), name="activity_create"),
 ]

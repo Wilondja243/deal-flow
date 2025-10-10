@@ -21,7 +21,7 @@ class ProspectView(LoginRequiredMixin, View):
     template_name = "crm/prospect.html"
 
     def get(self, request):
-        return render(request, self.template_name, View)
+        return render(request, self.template_name)
 
 
 class ProspectCreateView(LoginRequiredMixin, View):
@@ -54,6 +54,13 @@ class AccountCreateView(LoginRequiredMixin, View):
 
 class ActivityView(LoginRequiredMixin, View):
     template_name = "crm/activity.html"
+
+    def get(self, request):
+        return render(request, self.template_name)
+    
+
+class ActivityCreateView(LoginRequiredMixin, View):
+    template_name = "crm/activity_form.html"
 
     def get(self, request):
         return render(request, self.template_name)

@@ -1,0 +1,118 @@
+{% extends "./base/base.html" %}
+
+
+{% block side_bar %}
+    {% include "./base/side_bar.html" %}
+{% endblock %}
+
+{% block header %}
+    {% include "./base/header.html" %}
+{% endblock %}
+
+
+{% block content %}
+
+<div class="form-container">
+    <h2 class="form-title"><i class="bi bi-journal-plus"></i> Enregistrer une Activité</h2>
+    
+    <div class="tab-controls">
+        <button type="button" class="tab-button active" data-type="task">
+            <i class="bi bi-check2-square"></i> Tâche
+        </button>
+        <button type="button" class="tab-button" data-type="call">
+            <i class="bi bi-telephone-fill"></i> Appel
+        </button>
+        <button type="button" class="tab-button" data-type="email">
+            <i class="bi bi-envelope-fill"></i> E-mail
+        </button>
+    </div>
+    
+    <form id="activityForm" data-active-type="task">
+
+        {% csrf_token %}
+        
+        <div class="form-row">
+            <div class="form-group">
+                <label for="activity-title">Sujet de l'activité <span style="color: red;">*</span></label>
+                <input type="text" id="activity-title" class="form-control" required placeholder="Ex: Préparer la démo, Appel de relance, etc.">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="activity-contact">Contact Lié</label>
+                <select id="activity-contact" class="form-control">
+                    <option value="">-- Rechercher un Contact --</option>
+                    <option value="Alice">Alice Martin (Alpha Corp)</option>
+                    <option value="Bernard">Bernard Lemaire (ZETA Tech)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="activity-opportunity">Affaire Liée (Optionnel)</label>
+                <select id="activity-opportunity" class="form-control">
+                    <option value="">-- Non lié à une affaire --</option>
+                    <option value="Alpha-001">Alpha Corp - Migration Cloud (65k €)</option>
+                    <option value="ZETA-002">ZETA Tech - Licence CRM (5k €)</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="type-specific-fields">
+
+            <div class="form-row task-date-row">
+                <div class="form-group">
+                    <label for="task-due-date">Date Échéance <span style="color: red;">*</span></label>
+                    <input type="date" id="task-due-date" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="task-due-time">Heure (Optionnel)</label>
+                    <input type="time" id="task-due-time" class="form-control">
+                </div>
+            </div>
+
+            <div class="form-row call-outcome-row">
+                <div class="form-group">
+                    <label for="call-outcome">Résultat de l'Appel</label>
+                    <select id="call-outcome" class="form-control">
+                        <option value="Scheduled">Planifié/À venir</option>
+                        <option value="Completed" selected>Terminé (Réussi)</option>
+                        <option value="NoAnswer">Pas de réponse / Message</option>
+                        <option value="Unsuccessful">Terminé (Non abouti)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="call-duration">Durée (minutes)</label>
+                    <input type="number" id="call-duration" class="form-control" min="1" placeholder="Ex: 15">
+                </div>
+            </div>
+
+            <div class="form-row email-subject-row">
+                <div class="form-group">
+                    <label for="email-direction">Direction de l'E-mail</label>
+                    <select id="email-direction" class="form-control">
+                        <option value="outbound" selected>Sortant (Envoyé par moi)</option>
+                        <option value="inbound">Entrant (Reçu par moi)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="email-date">Date de l'E-mail <span style="color: red;">*</span></label>
+                    <input type="datetime-local" id="email-date" class="form-control" required>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="form-group">
+            <label for="activity-notes">Notes / Détails de l'activité</label>
+            <textarea id="activity-notes" class="form-control" rows="4" placeholder="Résumé de l'appel, étapes de la tâche, contenu de l'email..."></textarea>
+        </div>
+
+
+        <div class="form-actions">
+            <button type="button" class="btn btn-secondary"><i class="bi bi-x-lg"></i> Annuler</button>
+            <button type="submit" class="btn btn-primary"><i class="bi bi-plus-circle"></i> Ajouter l'Activité</button>
+        </div>
+    </form>
+</div>
+
+{% endblock %}
