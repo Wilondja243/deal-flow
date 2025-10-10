@@ -1,5 +1,6 @@
 from django.urls import path
 
+from dealflow.app.users.views import LoginView
 from dealflow.app.crm.views import (
     DashboardView,
     OpportunityView,
@@ -13,6 +14,8 @@ from dealflow.app.crm.views import (
 
 
 urlpatterns = [
+    path('account/login/', LoginView.as_view(), name="login"),
+    
     path('', DashboardView.as_view(), name="dashboard"),
     path('opportunity/', OpportunityView.as_view(), name="opportunity"),
     path('prospect/', ProspectView.as_view(), name="prospect"),
