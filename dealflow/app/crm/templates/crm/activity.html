@@ -14,7 +14,9 @@
 
 
 <div class="activities-wrapper wrapper">
-    <h1><i class="bi bi-calendar3"></i> Historique et Tâches de l'Équipe</h1>
+    <h1><i class="bi bi-calendar3"></i> Historique des activités</h1>
+
+    {% if activities %}
 
     <header class="list-header-actions">
         
@@ -55,50 +57,35 @@
                 </tr>
             </thead>
             <tbody>
+
+                {% for activity in activities %}
+
                 <tr>
-                    <td class="col-date">15/10/2025 à 10h00</td>
+                    <td>15/10/2025 à 10h00</td>
                     <td class="col-type">
                         <i class="bi bi-check2-square activity-type-icon type-task"></i> Tâche
                     </td>
                     <td>Préparer la proposition pour Alpha Corp.</td>
                     <td class="col-link"><a href="#">Alpha Corp Solutions</a></td>
-                    <td class="col-owner">Jean Dupont</td>
+                    <td>Jean Dupont</td>
                     <td><span class="status-badge status-pending">En Cours</span></td>
                     <td class="col-actions">
                         <button class="btn action-btn" title="Marquer Terminé"><i class="bi bi-check-circle"></i></button>
                     </td>
                 </tr>
-                
-                <tr>
-                    <td class="col-date">09/10/2025 à 14h30</td>
-                    <td class="col-type">
-                        <i class="bi bi-telephone-fill activity-type-icon type-call"></i> Appel
-                    </td>
-                    <td>Découverte avec Alice Martin. Budget validé.</td>
-                    <td class="col-link"><a href="#">Alice Martin</a></td>
-                    <td class="col-owner">Jean Dupont</td>
-                    <td><span class="status-badge status-completed">Terminée</span></td>
-                    <td class="col-actions">
-                        <button class="btn action-btn" title="Voir Détails"><i class="bi bi-eye"></i></button>
-                    </td>
-                </tr>
-                
-                <tr>
-                    <td class="col-date">20/10/2025 à 16h00</td>
-                    <td class="col-type">
-                        <i class="bi bi-envelope-fill activity-type-icon type-email"></i> Email
-                    </td>
-                    <td>Envoyer le contrat final à l'équipe juridique Orion.</td>
-                    <td class="col-link"><a href="#">Groupe Orion</a></td>
-                    <td class="col-owner">Sophie Dubois</td>
-                    <td><span class="status-badge status-pending">En Cours</span></td>
-                    <td class="col-actions">
-                        <button class="btn action-btn" title="Marquer Terminé"><i class="bi bi-check-circle"></i></button>
-                    </td>
-                </tr>
+
+                {% endfor %}
+
             </tbody>
         </table>
     </div>
+
+    {% else %}
+        <div style="text-align: center;margin: 8em 0;color: var(--bs-text-muted);">
+            <i class="bi bi-calendar3" style="font-size: 50px;"></i>
+            <p>Aucune activitée disponible pour le moment</p> 
+        </div>
+    {% endif %}
 </div>
 
 {% endblock %}

@@ -1,0 +1,147 @@
+@import url("./style.72b5983340d9.css");
+
+
+.form-container {
+    width: 90%;
+    margin: 40px;
+    background: var(--bs-card);
+    border-radius: 5px;
+    box-shadow: var(--shadow-modal);
+    padding: 30px;
+    border: 1px solid var(--bs-border);
+}
+
+/* create_user style */
+.auth-page {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--bs-bg);
+}
+.auth-view{
+    width: 100%;
+    max-width: 400px;
+    padding: 30px 20px;
+    background: var(--bs-card);
+    border-radius: 5px;
+    box-shadow: 0 10px 30px var(--shadow);
+}
+.auth-view h2 {
+    font-size: 1.4rem;
+    color: var(--bs-text);
+    margin-bottom: 30px;
+}
+/* End create_user style */
+
+.form-container .form-title{
+    margin-bottom: 30px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--bs-text);
+    font-size: 0.95em;
+}
+
+.form-control, select.form-control {
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid var(--bs-border);
+    border-radius: 5px;
+    background-color: var(--bs-bg);
+    color: var(--text-light);
+    transition: border-color 0.2s;
+    font-size: 1em;
+    -webkit-appearance: none;
+}
+
+.form-control:focus {
+    border-color: var(--border-focus);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 180, 216, 0.3);
+}
+
+.form-control::placeholder{
+    font-size: 0.8em;
+}
+
+.form-row {
+    display: flex;
+    gap: 20px;
+}
+.form-row .form-group {
+    flex: 1;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 30px;
+}
+
+.help-text {
+    font-size: 0.75em;
+    color: #A0AEC0;
+    margin-top: 5px;
+}
+
+
+.tab-controls {
+    display: flex;
+    border-bottom: 2px solid var(--border-color);
+    margin-bottom: 20px;
+}
+
+.tab-button {
+    background: none;
+    border: none;
+    padding: 15px 20px;
+    font-weight: 600;
+    color: #A0AEC0;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.tab-button.active {
+    color: var(--bs-text);
+    background-color: rgba(0, 180, 216, 0.1);
+    border: 1px solid var(--bs-border);
+    padding: 8px;
+}
+
+.tab-button:not(.active):hover {
+    color: var(--text-light);
+}
+
+
+/* Activity form */
+
+.tab-button i { font-size: 1.1em; }
+.tab-button[data-type="call"].active i { color: var(--call-color); }
+.tab-button[data-type="task"].active i { color: var(--task-color); }
+.tab-button[data-type="email"].active i { color: var(--email-color); }
+
+.call-outcome-row {
+    display: none;
+}
+
+.email-subject-row {
+    display: none;
+}
+
+/* Petite astuce CSS pour simuler l'affichage d'un type par défaut (Tâche ici) */
+.form-container form:not([data-active-type="task"]) .task-date-row { display: none; }
+.form-container form:not([data-active-type="call"]) .call-outcome-row { display: none; }
+.form-container form:not([data-active-type="email"]) .email-subject-row { display: none; }

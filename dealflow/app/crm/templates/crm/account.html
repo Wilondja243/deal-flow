@@ -14,6 +14,13 @@
 
 
 <div class="wrapper">
+
+    {% if messages %}
+    {% for message in messages %}
+        <div class="success">{{ message }}</div>
+    {% endfor %}
+    {% endif %}
+
     <h1><i class="bi bi-building"></i> Gestion des Comptes Clients</h1>
 
     <div class="kpi-grid">
@@ -53,8 +60,6 @@
 
     {% if accounts %}
 
-    {% for account in accounts %}
-
     <div class="table-container">
         <table class="accounts-table">
             <thead>
@@ -63,12 +68,14 @@
                     <th>Ville</th>
                     <th>Contact Principal</th>
                     <th>Téléphone</th>
-                    <th>Pipeline Actif</th>
                     <th>Statut</th>
                     <th>Actions</th>    
                 </tr>
             </thead>
             <tbody>
+
+                {% for account in accounts %}
+                
                 <tr>
                     <td class="col-name">{{ account.account_name }}</td>
                     <td>{{ account.address }}</td>
@@ -80,23 +87,29 @@
                         {% endfor %}
                     </td>
                     <td class="col-phone">{{ account.account_phone_number }}</td>
-                    <td class="col-pipeline-value">65 000 €</td>
                     <td class="col-status">
                         <span style="color: var(--bs-text-green);">
                             <i class="bi bi-arrow-up-circle-fill"></i> {{ account.status }}
                         </span>
                     </td>
                     <td class="col-actions">
-                        <button class="btn action-btn edit" title="Voir Fiche"><i class="bi bi-box-arrow-in-up-right"></i></button>
-                        <button class="btn action-btn" title="Ajouter Affaire"><i class="bi bi-plus-circle"></i></button>
+                        <a href="" class="btn action-btn edit" title="Voir le compte"><i class="bi bi-eye"></i></a>
+                        <a href="{% url 'account_update' account.id %}" class="btn action-btn edit" title="Voir Fiche"><i class="bi bi-box-arrow-in-up-right"></i></a>
+                        <a href="{% url 'prospect_create' account.id %}" class="btn action-btn" title="Ajouter un prospect"><i class="bi bi-plus-circle"></i></a>
                     </td>
                 </tr>
+
+                {% endfor %}
+
             </tbody>
         </table>
     </div>
 
-    {% endfor %}
-
+    {% else %}
+        <div style="text-align: center;margin: 2em 0;color: var(--bs-text-muted);border: 1px solid var(--bs-border);border-radius: 5px; padding: 30px 10px;">
+            <i class="bi bi-building" style="font-size: 50px;"></i>
+            <p>Aucun compte disponible pour le moment</p> 
+        </div>
     {% endif %}
 
 </div>

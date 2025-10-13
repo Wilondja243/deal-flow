@@ -22,29 +22,34 @@
         <div class="form-row">
             <div class="form-group">
                 <label for="prospect-first-name">Prénom <span style="color: red;">*</span></label>
-                <input type="text" id="prospect-first-name" class="form-control" required placeholder="Ex: Alice">
+                {{ form.first_name }}
+                {{ form.first_name.errors }}
             </div>
             <div class="form-group">
                 <label for="prospect-last-name">Nom <span style="color: red;">*</span></label>
-                <input type="text" id="prospect-last-name" class="form-control" required placeholder="Ex: Martin">
+                {{ form.last_name }}
+                {{ form.last_name.errors }}
             </div>
         </div>
 
         <div class="form-row">
             <div class="form-group">
-                <label for="prospect-title">Poste / Fonction</label>
-                <input type="text" id="prospect-title" class="form-control" placeholder="Ex: Directrice des Achats">
+                <label for="prospect-title">Poste / Fonction <span style="color: red;">*</span></label>
+                {{ form.post_title }}
+                {{ form.post_title.errors }}
             </div>
             <div class="form-group">
                 <label for="prospect-email">Email Professionnel <span style="color: red;">*</span></label>
-                <input type="email" id="prospect-email" class="form-control" required placeholder="Ex: alice.martin@compagnie.com">
+                {{ form.email }}
+                {{ form.email.errors }}
             </div>
         </div>
         
         <div class="form-row">
             <div class="form-group">
-                <label for="prospect-phone">Téléphone Direct</label>
-                <input type="tel" id="prospect-phone" class="form-control" placeholder="Ex: +33 6 12 34 56 78">
+                <label for="prospect-phone">Téléphone Direct <span style="color: red;">*</span></label>
+                {{ form.phone_number }}
+                {{ form.phone_number.errors }}
             </div>
             {% comment %} <div class="form-group">
                 <label for="prospect-account">Compte Lié</label>
@@ -58,7 +63,7 @@
         </div>
 
         <div class="form-actions">
-            <button type="button" class="btn btn-secondary">Annuler</button>
+            <a href="{% url 'prospect' %}" class="btn btn-secondary">Annuler</a>
             <button type="submit" class="btn btn-primary">Enregistrer le Prospect</button>
         </div>
     </form>

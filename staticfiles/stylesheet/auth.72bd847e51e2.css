@@ -1,0 +1,161 @@
+@import url("./style.72b5983340d9.css");
+
+
+/*#################
+  FORM STYLE
+##################*/
+
+
+.auth-page {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--bs-bg);
+}
+
+.auth-card h1{
+    margin-bottom: 2em;
+    font-size: 40px;
+    text-align: center;
+}
+.auth-card h1 strong{
+    color: var(--bs-primary);
+}
+
+.auth-view{
+    width: 100%;
+    max-width: 400px;
+    padding: 30px 20px;
+    background-color: var(--bs-card);
+    border-radius: 5px;
+    box-shadow: 0 10px 30px var(--shadow);
+    text-align: center;
+}
+
+.auth-logo {
+    display: block;
+    margin-bottom: 30px;
+    font-size: 2rem;
+}
+
+.auth-view h2 {
+    font-size: 1.4rem;
+    color: var(--bs-text);
+    margin-bottom: 30px;
+}
+
+.auth-view form {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.switch-link {
+    margin-top: 25px;
+    font-size: 0.95rem;
+    color: var(--bs-text-muted);
+}
+
+.switch-link a {
+    color: var(--bs-text-muted);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+
+.role-selector {
+    margin-bottom: 25px;
+}
+
+.role-options {
+    display: flex;
+    gap: 10px;
+    margin-top: 5px;
+}
+
+.role-btn {
+    flex-grow: 1;
+    padding: 15px 10px;
+    border: 2px solid #414141;
+    background-color: var(--bs-card);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--bs-text);
+    transition: all 0.3s;
+    text-align: center;
+}
+
+.role-btn i {
+    display: block;
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+    color: var(--bs-text);
+}
+
+.role-btn:hover {
+    border-color: var(--bs-text-muted);
+}
+
+.role-btn.active {
+    border-color: var(--bs-text-muted);
+    background-color: var(--bs-primary-hover);
+    color: var(--bs-text);
+}
+
+.form-group input{
+    margin-top: 10px;
+}
+.form-group input:focus{
+    border: 1px solid var(--bs-primary);
+    box-shadow: 0 0 0 1px #00b4d84d;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    color: var(--bs-text);
+    padding: 12px 5px;
+    border-radius: 5px;
+    border: 1px solid #474747;
+    background: initial;
+    font-size: 16px;
+}
+
+.btns{
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    justify-content: center;
+}
+.btns .cancel{
+    background-color: inherit;
+    border: 1px solid #474747;
+}
+
+
+
+.form-group .field-error{
+    color: var(--bs-text-red);
+}
+
+.error{
+    color: var(--bs-text-red);
+    background: rgba(255, 0, 0, 0.048);
+    border: 1px solid var(--bs-border);
+    border-radius: 5px;
+    margin-bottom: 30px;
+    padding: 10px 5px;
+}
+
+
+/*#################
+  END FORM STYLE
+##################*/

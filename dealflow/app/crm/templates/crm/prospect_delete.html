@@ -1,0 +1,32 @@
+{% extends "./base/base.html" %}
+
+
+{% block side_bar %}
+    {% include "./base/side_bar.html" %}
+{% endblock %}
+
+{% block header %}
+    {% include "./base/header.html" %}
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="popup-layout">
+        <div class="popup-layout__wrapper" role="alertdialog" aria-modal="true" aria-labelledby="dialog-title" aria-describedby="dialog-description">
+            <div class="message">
+                <i class="bi bi-exclamation-triangle"></i>
+                <h2 id="dialog-title">Voulez-vous vraiment supprimer cet élément ?</h2>
+                <p id="dialog-description">Cette action est irréversible. Toutes les données associées seront définitivement perdues.</p>
+            </div>
+            <div class="btns">
+                <a href="{% url "prospect" %}" >Annuler</a>
+                <form method="POST" action="{% url "prospect_delete" prospect.id %}">
+                    {% csrf_token %}
+                    <button>Supprimer</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

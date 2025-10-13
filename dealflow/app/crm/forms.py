@@ -40,8 +40,8 @@ class ProspectForm(forms.ModelForm):
             "first_name": forms.TextInput(attrs={'placeholder': "nom", 'class': 'form-control'}),
             "last_name": forms.TextInput(attrs={'placeholder': "post-nom", 'class': 'form-control'}),
             "post_title": forms.TextInput(attrs={'placeholder': "titre de post", 'class': 'form-control'}),
-            "email": forms.TextInput(attrs={'placeholder': "Ex: bakole@monalina.com"}),
-            "phone_number": forms.TextInput(attrs={'placeholder': "Ex: +243 92 524 463 3"})
+            "email": forms.TextInput(attrs={'placeholder': "Ex: bakole@monalina.com", 'class': 'form-control'}),
+            "phone_number": forms.TextInput(attrs={'placeholder': "Ex: +243 92 524 463 3", 'class': 'form-control'})
         }
 
 

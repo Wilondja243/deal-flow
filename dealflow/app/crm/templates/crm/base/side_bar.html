@@ -8,7 +8,7 @@
             <li><a href="{% url 'account' %}" class="link"><i class="bi bi-building"></i> Comptes</a></li>
             <li><a href="{% url 'activity' %}" class="link"><i class="bi bi-check2-square"></i>Activités</a></li>
             <li><a href="{% url 'product' %}" class="link"><i class="bi bi-box"></i> Produits</a></li>
-            <li><a href="#" class="link"><i class="bi bi-gear"></i> Paramètres</a></li>
+            {% comment %} <li><a href="#" class="link"><i class="bi bi-gear"></i> Paramètres</a></li> {% endcomment %}
         </ul>
         <div class="btns">
             {% if user.is_superuser %}

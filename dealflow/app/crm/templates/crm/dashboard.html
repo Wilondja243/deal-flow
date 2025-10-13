@@ -30,11 +30,11 @@
             <span class="kpi-trend">↑ 12% vs Mois Dernier</span>
         </div>
 
-        <div class="card kpi-card">
+        {% comment %} <div class="card kpi-card">
             <span class="card-title">Taux de Conversion</span>
             <span class="kpi-value">22%</span>
             <span class="kpi-trend">↓ 3% vs Objectif</span>
-        </div>
+        </div> {% endcomment %}
 
         <div class="card kpi-card">
             <span class="card-title">Tâches à Faire</span>
@@ -68,12 +68,55 @@
 
     </div>
 
-    {% comment %} <div class="dashboard-critical-list">
-        <div class="card table-card">
-            <h2>Affaires à Risque (Deal Rotting)</h2>
-            <p>Opportunités sans activité depuis plus de 7 jours.</p>
-        </div>
-    </div> {% endcomment %}
+    {% if accounts %}
+
+    <div class="table-container">
+        <h2>Comptes</h2>
+        <table class="accounts-table">
+            <thead>
+                <tr>
+                    <th>Nom de l'Entreprise</th>
+                    <th>Ville</th>
+                    <th>Contact Principal</th>
+                    <th>Téléphone</th>
+                    <th>Statut</th>
+                    <th>Actions</th>    
+                </tr>
+            </thead>
+            <tbody>
+
+                {% for account in accounts %}
+
+                <tr>
+                    <td class="col-name">{{ account.account_name }}</td>
+                    <td>{{ account.address }}</td>
+                    <td class="col-contact">
+                        {% for prospect in account.prospect.all %}
+                        {{ prospect.first_name }} {{ prospect.last_name }}
+                        {% empty %}
+                        Null
+                        {% endfor %}
+                    </td>
+                    <td class="col-phone">{{ account.account_phone_number }}</td>
+                    <td class="col-status">
+                        <span style="color: var(--bs-text-green);">
+                            <i class="bi bi-arrow-up-circle-fill"></i> {{ account.status }}
+                        </span>
+                    </td>
+                    <td class="col-actions">
+                        <a href="" class="btn action-btn edit" title="Voir le compte"><i class="bi bi-eye"></i></a>
+                        <a href="{% url 'account_update' account.id %}" class="btn action-btn edit" title="Voir Fiche"><i class="bi bi-box-arrow-in-up-right"></i></a>
+                        <a href="{% url 'prospect_create' account.id %}" class="btn action-btn" title="Ajouter un prospect"><i class="bi bi-plus-circle"></i></a>
+                    </td>
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+
+    {% endif %}
 
 </section>
 
