@@ -13,56 +13,60 @@
 {% block content %}
 
 <div class="form-container wrapper">
-    <h2 class="form-title"><i class="bi bi-building-add"></i> Créer un Nouveau Compte</h2>
+    <h2 class="form-title">Créer un Nouveau Compte</h2>
     
-    <form>
+    <form method="post">
+
+        {% csrf_token %}
+
         <div class="form-row">
             <div class="form-group">
                 <label for="account-name">Nom de l'Entreprise <span style="color: red;">*</span></label>
-                <input type="text" id="account-name" class="form-control" required placeholder="Ex: Alpha Corp Solutions">
+                {{ form.account_name }}
+                <div class="field_error">{{ form.account_name.erros }}</div>
             </div>
             <div class="form-group">
                 <label for="account-website">Site Web</label>
-                <input type="url" id="account-website" class="form-control" placeholder="Ex: https://www.alphacorp.com">
+                {{ form.web_site }}
+                <div class="field_error">{{ form.web_site.errors }}</div>
             </div>
         </div>
 
         <div class="form-row">
             <div class="form-group">
                 <label for="account-phone">Téléphone Principal</label>
-                <input type="tel" id="account-phone" class="form-control" placeholder="Ex: +33 1 23 45 67 89">
+                {{ form.account_phone_number }}
+                <div class="field_error">{{ form.account_phone_number.erros }}</div>
             </div>
             <div class="form-group">
                 <label for="account-industry">Secteur d'Activité</label>
-                <select id="account-industry" class="form-control">
-                    <option value="">Sélectionner un secteur</option>
-                    <option value="IT">Technologies de l'Information</option>
-                    <option value="Finance">Finance / Assurance</option>
-                    <option value="Manufacturing">Industrie / Fabrication</option>
-                    <option value="Other">Autre...</option>
-                </select>
+                {{ form.activity_sector }}
+                <div class="field_error">{{ form.activity_sector.errors }}</div>
             </div>
         </div>
         
         <div class="form-row">
             <div class="form-group">
                 <label for="account-city">Ville</label>
-                <input type="text" id="account-city" class="form-control" placeholder="Ex: Paris">
+                {{ form.address }}
+                <div class="field_error">{{ form.address.errors }}</div>
             </div>
             <div class="form-group">
                 <label for="account-zip">Code Postal</label>
-                <input type="text" id="account-zip" class="form-control" placeholder="Ex: 75001">
+                {{ form.postal_code }}
+                <div class="field_error">{{ form.postal_code.errors }}</div>
             </div>
         </div>
         
         <div class="form-group">
             <label for="account-notes">Notes / Description du Compte</label>
-            <textarea id="account-notes" class="form-control" rows="7" placeholder="Informations clés sur l'entreprise, historique..."></textarea>
+            {{ form.description }}
+            <div>{{ form.description.errors }}</div>
         </div>
 
         <div class="form-actions">
-            <button type="button" class="btn btn-secondary"><i class="bi bi-x-lg"></i> Annuler</button>
-            <button type="submit" class="btn btn-primary"><i class="bi bi-floppy"></i> Enregistrer le Compte</button>
+            <button type="button" class="btn btn-secondary">Annuler</button>
+            <button type="submit" class="btn btn-primary">Enregistrer le Compte</button>
         </div>
     </form>
 </div>
