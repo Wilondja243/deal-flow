@@ -10,5 +10,11 @@
             <li><a href="{% url 'product' %}" class="link"><i class="bi bi-box"></i> Produits</a></li>
             <li><a href="#" class="link"><i class="bi bi-gear"></i> Paramètres</a></li>
         </ul>
+        <div class="btns">
+            {% if user.is_superuser %}
+            <a href="{% url 'create_user' %}" class="btn add_user">Ajouter un utilisateur</a>
+            {% endif %}
+            <a href="{% url 'logout' %}" class="logout btn-secondary btn " style="color: var(--bs-text-red)">Déconnexion</a>
+        </div>
     </nav>
 </aside>

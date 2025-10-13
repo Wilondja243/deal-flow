@@ -10,8 +10,8 @@
 
 
 :root {
-    --bs-primary: #0099b8;
-    --bs-primary-hover: #006f85;
+    --bs-primary: #0b8da7;
+    --bs-primary-hover: #075c6d;
     --bs-bg: #151618;
     --bs-card: #181a1b;
     --bs-text: #ececec;
@@ -56,10 +56,19 @@ body {
     background-color: transparent;
     color: var(--bs-text);
     font-size: 15px;
+    border-radius: 5px;
+    padding: 10px 20px;
     border: 1px solid var(--bs-border);
 }
 .btn-secondary:hover{
     background: var(--bs-card);
+}
+.btns{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    margin: none 20px auto 20px;
+    text-align: center;
 }
 
 h1 {

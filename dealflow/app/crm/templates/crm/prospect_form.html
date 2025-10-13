@@ -46,21 +46,20 @@
                 <label for="prospect-phone">Téléphone Direct</label>
                 <input type="tel" id="prospect-phone" class="form-control" placeholder="Ex: +33 6 12 34 56 78">
             </div>
-            <div class="form-group">
-                <label for="prospect-account">Compte (Entreprise) Lié</label>
+            {% comment %} <div class="form-group">
+                <label for="prospect-account">Compte Lié</label>
                 <select id="prospect-account" class="form-control">
                     <option value="">-- Rechercher une entreprise --</option>
                     <option value="AlphaCorp" selected>Alpha Corp Solutions</option>
                     <option value="BetaIT">Beta IT Services</option>
                     <option value="NewAccount">+ Créer Nouveau Compte...</option>
                 </select>
-                <div class="help-text">Assurez-vous de lier le contact à une entreprise existante.</div>
-            </div>
+            </div> {% endcomment %}
         </div>
 
         <div class="form-actions">
-            <button type="button" class="btn btn-secondary"><i class="bi bi-x-lg"></i> Annuler</button>
-            <button type="submit" class="btn btn-primary"><i class="bi bi-floppy"></i> Enregistrer le Prospect</button>
+            <button type="button" class="btn btn-secondary">Annuler</button>
+            <button type="submit" class="btn btn-primary">Enregistrer le Prospect</button>
         </div>
     </form>
 </div>

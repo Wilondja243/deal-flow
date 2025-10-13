@@ -20,6 +20,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'corsheaders',
+    'phonenumber_field',
 
     'dealflow.app.core',
     'dealflow.app.users',
@@ -98,6 +99,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# default region
+PHONENUMBER_DEFAULT_REGION = 'FR' 
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/

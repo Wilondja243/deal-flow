@@ -13,8 +13,8 @@ class ProductAdmin(admin.ModelAdmin):
 
 
 class AccountAdmin(admin.ModelAdmin):
-    list_display = ['user', 'company_name', 'address', 'activity_sector', 'status']
-    list_filter = ['company_name', 'address', 'activity_sector', 'status']
+    list_display = ['user', 'account_name', 'address', 'activity_sector', 'status']
+    list_filter = ['account_name', 'address', 'activity_sector', 'status']
 
 
 class PipelineAdmin(admin.ModelAdmin):

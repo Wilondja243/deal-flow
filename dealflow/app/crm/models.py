@@ -2,6 +2,7 @@
 from uuid import uuid4
 from django.db import models
 from django.conf import settings
+from phonenumber_field.modelfields import PhoneNumberField
 
 from dealflow.app.core.models import BaseModel
 
@@ -24,23 +25,25 @@ class Account(BaseModel):
 
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True)
-    company_name = models.CharField(max_length=50)
+    account_name = models.CharField(max_length=50)
     address = models.CharField(max_length=100)
     activity_sector = models.CharField(max_length=150)
     description = models.TextField()
-    web_site = models.URLField()
+    account_phone_number = PhoneNumberField(unique=True, region="FR")
+    web_site = models.URLField(null=True, blank=True)
     postal_code = models.CharField(max_length=100)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default="Prospect")
 
 
 class Prospect(BaseModel):
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, related_name="prospect")
     account = models.ForeignKey(Account, on_delete=models.SET_NULL, null=True)
-    full_name = models.CharField(max_length=50)
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
     post_title = models.CharField(max_length=50)
     email = models.EmailField()
-    phone_number = models.CharField(max_length=20)
+    phone_number = PhoneNumberField(unique=True, region="FR")
 
 
 class Pipeline(BaseModel):

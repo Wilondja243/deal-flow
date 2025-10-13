@@ -1,4 +1,21 @@
+
 from django import forms
+
+from .models import User
+
+
+class UserForm(forms.ModelForm):
+
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password', 'role']
+
+        widgets = {
+            "username": forms.TextInput(attrs={'placeholder': "nom", 'class': 'form-control'}),
+            "email": forms.TextInput(attrs={'placeholder': "Ex: bakole@monalina.com", 'class': 'form-control'}),
+            "password": forms.PasswordInput(attrs={'placeholder': "*********", 'class': 'form-control'}),
+            "role": forms.Select(attrs={'class': 'form-control'})
+        }
 
 
 class LoginForm(forms.Form):
