@@ -251,19 +251,11 @@
     gap: 15px;
 }
 
-.pipeline-container {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(300px, 1fr)); 
-    gap: 30px;
-    overflow-x: auto; 
-    padding-bottom: 15px;
-}
-
 .pipeline-column {
-    background-color: var(--medium-bg);
-    border-radius: var(--border-radius);
-    padding: 20px 15px;
-    min-height: 75vh; 
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    padding-bottom: 15px;
 }
 
 .column-title {
@@ -294,6 +286,7 @@
 
 /* Opportunity card */
 .opportunity-card {
+    flex-grow: 1;
     background-color: var(--bs-card);
     padding: 18px;
     border-radius: 5px;

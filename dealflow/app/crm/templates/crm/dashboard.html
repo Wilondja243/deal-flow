@@ -26,7 +26,7 @@
         
         <div class="card kpi-card">
             <span class="card-title">Pipeline Actif</span>
-            <span class="kpi-value">$150,000</span>
+            <span class="kpi-value">{{ total_opportunity.total_value }}</span>
             <span class="kpi-trend">↑ 12% vs Mois Dernier</span>
         </div>
 
@@ -37,14 +37,14 @@
         </div> {% endcomment %}
 
         <div class="card kpi-card">
-            <span class="card-title">Tâches à Faire</span>
-            <span class="kpi-value">15</span>
+            <span class="card-title">Compte total</span>
+            <span class="kpi-value">{{ total_account_data.total }}</span>
             <span class="kpi-trend">3 Urgentes Aujourd'hui</span>
         </div>
         
         <div class="card kpi-card">
-            <span class="card-title">Revenu Gagné (Mois)</span>
-            <span class="kpi-value">$35,000</span>
+            <span class="card-title">Total opportunités</span>
+            <span class="kpi-value">{{ total_opportunity.total }}</span>
             <span class="kpi-trend">Objectif atteint à 70%</span>
         </div>
 
@@ -104,7 +104,6 @@
                         </span>
                     </td>
                     <td class="col-actions">
-                        <a href="" class="btn action-btn edit" title="Voir le compte"><i class="bi bi-eye"></i></a>
                         <a href="{% url 'account_update' account.id %}" class="btn action-btn edit" title="Voir Fiche"><i class="bi bi-box-arrow-in-up-right"></i></a>
                         <a href="{% url 'prospect_create' account.id %}" class="btn action-btn" title="Ajouter un prospect"><i class="bi bi-plus-circle"></i></a>
                     </td>
@@ -118,7 +117,80 @@
 
     {% endif %}
 
-</section>
+    <script>
+        const activityData = '{{ activity_data|safe }}';
+        const parseActivityData = JSON.parse(activityData)
 
+        console.log(parseActivityData)
+
+
+        const DEFAULT_COLORS = [
+            'rgba(255, 99, 132, 0.7)',
+            'rgba(54, 162, 235, 0.7)',
+            'rgba(255, 206, 86, 0.7)',
+            'rgba(75, 192, 192, 0.7)'
+        ]
+
+
+        function chart(type, label_data, data, label='', canvasElement){
+
+            if(canvasElement){
+                const ctx = canvasElement.getContext('2d');
+
+                new Chart(ctx, {
+                    type: type,
+                    data: {
+                        labels: label_data,
+                        datasets: [{
+                            label: label,
+                            data: data,
+                            backgroundColor: (type === 'bar') ? DEFAULT_COLORS[1] : DEFAULT_COLORS,
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                })
+            }
+        }
+
+
+        document.addEventListener('DOMContentLoaded', function() {
+
+            const canvasElement = document.getElementById('pipelineChart');
+            const canvasElement2 = document.getElementById('activityChart');
+
+            if(canvasElement){
+                chart(
+                    'bar',
+                    ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Séptembre', 'Octobre', 'Novembre', 'Décembre'],
+                    parseActivityData,
+                    'Activités ',
+                    canvasElement
+                )
+
+            }
+
+            if(canvasElement2){
+                chart(
+                    'doughnut',
+                    ['Qualification', 'Proposition', 'Négociation', 'Gagnée'],
+                    [12000, 19000, 3000, 5000],
+                    'Valeur du Pipeline (€)',
+                    canvasElement2
+                )
+            }
+
+        });
+    </script>
+
+</section>
 
 {% endblock %}

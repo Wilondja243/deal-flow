@@ -4,6 +4,7 @@ from django.db import models
 from django.conf import settings
 from phonenumber_field.modelfields import PhoneNumberField
 
+from .managers import ActivityManager, AccountManager, OpportunityManager
 from dealflow.app.core.models import BaseModel
 
 
@@ -35,6 +36,9 @@ class Account(BaseModel):
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default="Prospect")
 
 
+    objects = AccountManager()
+
+
 class Prospect(BaseModel):
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, related_name="prospect")
@@ -64,6 +68,9 @@ class Opportunity(BaseModel):
     probability_purcent = models.CharField(max_length=20, default="")
 
 
+    objects = OpportunityManager()
+
+
 class Activity(BaseModel):
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -72,3 +79,5 @@ class Activity(BaseModel):
     activity_type = models.CharField(max_length=50)
     description_note = models.TextField()
     is_finished = models.BooleanField(default=False)
+
+    objects = ActivityManager()

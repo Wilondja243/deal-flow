@@ -5,7 +5,13 @@
             <li><a href="{% url 'dashboard' %}" class="link"><i class="bi bi-graph-up-arrow"></i> Dashboard</a></li>
             <li><a href="{% url 'opportunity' %}" class="link"><i class="bi bi-cash-stack"></i> Opportunités</a></li>
             <li><a href="{% url 'prospect' %}" class="link"><i class="bi bi-person"></i> Prospects</a></li>
-            <li><a href="{% url 'account' %}" class="link"><i class="bi bi-building"></i> Comptes</a></li>
+
+            {% if user.role|upper == "ADMIN" %}
+            <li><a href="{% url 'admin_account' %}" class="link"><i class="bi bi-building"></i> Comptes</a></li>
+            {% else %}
+            <li><a href="{% url 'account' %}" class="link"><i class="bi bi-building"></i> Comptes</a></li> 
+            {% endif %}
+
             <li><a href="{% url 'activity' %}" class="link"><i class="bi bi-check2-square"></i>Activités</a></li>
             <li><a href="{% url 'product' %}" class="link"><i class="bi bi-box"></i> Produits</a></li>
             {% comment %} <li><a href="#" class="link"><i class="bi bi-gear"></i> Paramètres</a></li> {% endcomment %}

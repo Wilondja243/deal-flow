@@ -1,19 +1,68 @@
+import json
+from datetime import date
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse_lazy
 from django.contrib import messages
-from django.views.generic import View, CreateView, UpdateView, DeleteView, DetailView
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Count
+from django.views.generic import View, CreateView, UpdateView, DeleteView, DetailView, ListView
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 from dealflow.app.crm.forms import AccountForm, ProspectForm
-from dealflow.app.crm.models import Account, Activity, Prospect
+from dealflow.app.crm.models import Account, Activity, Opportunity, Prospect
 
 
-class DashboardView(LoginRequiredMixin, View):
+class DashboardView(LoginRequiredMixin, ListView):
     template_name = "crm/dashboard.html"
+    context_object_name = "accounts"
+
+    def get_queryset(self):
+        if self.request.user.role.upper() == "ADMIN":
+            return Account.objects.all()
+        else:
+            return Account.objects.filter(user=self.request.user)
+        
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        total_activity = None
+        total_account_data = None
+        total_opportunity = None
+
+        if self.request.user.role.upper() == "ADMIN":
+            total_activity = Activity.objects.get_admin_activity_data()
+            total_account_data = Account.objects.get_admin_total_account()
+            total_opportunity = Opportunity.objects.get_admin_total_opportunity()
+
+        else:
+            total_activity = Activity.objects.get_user_activity_data(self.request.user)
+            total_account_data = Account.objects.get_total_account(self.request.user)
+            total_opportunity = Opportunity.objects.get_total_opportunity(self.request.user)
+
+        order_activity_data = []
+        for month in range(1, 13):
+            order_activity_data.append(total_activity.get(month, 0))
+
+        print(total_opportunity)
+            
+        context["activity_data"] = json.dumps(order_activity_data)
+        context["total_account_data"] = total_account_data
+        context["total_opportunity"] = total_opportunity
+
+        return context
+    
+
+class AdminAccountView(LoginRequiredMixin, UserPassesTestMixin, View):
+    template_name = "crm/admin/account.html"
+    # permission_denied_url = reverse_lazy('crm:dashboard')
+    # raise_exception = False
+
+    def test_func(self):
+        return self.request.user.role.upper() == 'ADMIN'
 
     def get(self, request):
-        accounts = Account.objects.filter(user=request.user)
-        return render(request, self.template_name, {'accounts': accounts})
+        accounts = Account.objects.all()
+        print(accounts)
+        return render(request, self.template_name, {'admin_accounts': accounts})
     
 
 class AccountView(LoginRequiredMixin, View):
@@ -28,7 +77,7 @@ class AccountCreateView(LoginRequiredMixin, CreateView):
     model = Account
     form_class = AccountForm
     template_name = "crm/account_form.html"
-    success_url = reverse_lazy('account')
+    success_url = reverse_lazy('admin_account')
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
@@ -36,14 +85,20 @@ class AccountCreateView(LoginRequiredMixin, CreateView):
         self.object.status = "Prospect"
         self.object.save()
 
-        print("Formulaire réussi")
+        messages.success(self.request, "Compte crée avec success.")
 
         return super().form_valid(form)
 
 
-class AccountDeatailView(LoginRequiredMixin, DetailView):
-    pass
-
+class AccountDetailView(LoginRequiredMixin, DetailView):
+    model = Account
+    template_name = "crm/account_detail.html"
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["accounts"] = Account.objects.filter(user=self.request.user)
+        return context
+    
 
 class AccountUpdateView(LoginRequiredMixin, UpdateView):
     model = Account

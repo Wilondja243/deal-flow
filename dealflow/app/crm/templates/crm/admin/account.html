@@ -1,12 +1,12 @@
-{% extends "./base/base.html" %}
+{% extends "../base/base.html" %}
 
 
 {% block side_bar %}
-    {% include "./base/side_bar.html" %}
+    {% include "../base/side_bar.html" %}
 {% endblock %}
 
 {% block header %}
-    {% include "./base/header.html" %}
+    {% include "../base/header.html" %}
 {% endblock %}
 
 
@@ -21,7 +21,7 @@
     {% endfor %}
     {% endif %}
 
-    <h1><i class="bi bi-building"></i> Gestion des Comptes Clients</h1>
+    <h1><i class="bi bi-building"></i> Statistiques de comptes</h1>
 
     <div class="kpi-grid">
         
@@ -33,7 +33,7 @@
         
         <div class="kpi-card">
             <p class="kpi-title">Compte Total</p>
-            <p class="kpi-value">{{ total_account_data.total_accout }}</p>
+            <p class="kpi-value">12</p>
             <p class="kpi-trend"><i class="bi bi-check2-circle"></i> Objectif atteint à 80%</p>
         </div>
         
@@ -44,21 +44,10 @@
         </div>
         
     </div>
-    
-    <header class="list-header-actions">
-        
-        <div class="search-controls">
-            <input type="text" class="search-input" placeholder="Rechercher par Nom d'Entreprise...">
-        </div>
 
-        <div class="actions">
-            <a href="{% url 'account_create' %}" class="btn btn-primary new-account-btn">
-                <i class="bi bi-building-add"></i> Nouveau Compte
-            </a>
-        </div>
-    </header>
+    {% if admin_accounts %}
 
-    {% if accounts %}
+    <h2>Liste de tous les comptes</h2>
 
     <div class="table-container">
         <table class="accounts-table">
@@ -74,7 +63,7 @@
             </thead>
             <tbody>
 
-                {% for account in accounts %}
+                {% for account in admin_accounts %}
                 
                 <tr>
                     <td class="col-name">{{ account.account_name }}</td>
@@ -93,6 +82,7 @@
                         </span>
                     </td>
                     <td class="col-actions">
+                        <a href="{% url 'account' %}" class="btn action-btn edit" title="Voir le compte"><i class="bi bi-eye"></i></a>
                         <a href="{% url 'account_update' account.id %}" class="btn action-btn edit" title="Voir Fiche"><i class="bi bi-box-arrow-in-up-right"></i></a>
                         <a href="{% url 'prospect_create' account.id %}" class="btn action-btn" title="Ajouter un prospect"><i class="bi bi-plus-circle"></i></a>
                     </td>
