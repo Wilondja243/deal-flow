@@ -26,13 +26,13 @@
 
     <header class="list-header-actions">
         
-        <div class="search-controls">
+        {% comment %} <div class="search-controls">
             <input type="text" class="search-input" placeholder="Rechercher par Nom ou Email...">
             <select class="form-select">
                 <option selected>Filtre : Commercial</option>
                 <option>Commercial : Moi</option>
             </select>
-        </div>
+        </div> {% endcomment %}
 
         {% comment %} <div class="actions">
             <a href="{% url 'prospect' %}" class="btn btn-primary new-contact-btn">
@@ -63,9 +63,13 @@
                     <td><a href="#" style="color: var(--bs-text-green); ">{{ prospect.account.account_name }}</a></td>
                     <td class="col-phone"><a href="tel:+33123456789">{{ prospect.phone_number }}</a></td>
                     <td class="col-email"><a href="mailto:alice.m@alphacorp.com">{{ prospect.email }}</a></td>
-                    <td class="col-actions">
-                        <a href="{% url 'prospect_update' prospect.id %}" class="btn action-btn edit" title="Modifier"><i class="bi bi-pencil-square"></i></a>
-                        <a href="{% url 'prospect_delete' prospect.id %}" class="btn action-btn delete" title="Supprimer"><i class="bi bi-trash"></i></a>
+                    <td class="col-actions dropdown-wrapper">
+                        <i class="bi bi-three-dots dropdown-trigger" data-prospect-id={{ prospect.id }}></i>
+                        <div class="dropdown">
+                            <li><i class="bi bi-pencil-square"></i><a href="{% url 'prospect_update' prospect.id %}" class="action-btn">Met à jour un prospect</a></li>
+                            <li><i class="bi bi-trash"></i><a href="{% url 'prospect_delete' prospect.id %}" class="action-btn">Supprimer un prospect</a></li>
+                            <li><i class="bi bi-plus-circle"></i><a href="{% url 'opportunity_create' prospect.id %}" class="action-btn">Ajouter une opportunité</a></li>
+                        </div>
                     </td>
                 </tr>
 

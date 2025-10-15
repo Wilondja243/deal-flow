@@ -8,9 +8,9 @@ from .managers import ActivityManager, AccountManager, OpportunityManager
 from dealflow.app.core.models import BaseModel
 
 
-class Product(BaseModel):
+class Service(BaseModel):
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
-    product_name = models.CharField(max_length=50)
+    service_name = models.CharField(max_length=50)
     price = models.DecimalField(max_digits=8, decimal_places=2)
     description = models.TextField()
 
@@ -19,8 +19,6 @@ class Account(BaseModel):
     STATUS_CHOICES = [
         ('Prospect', 'Prospect'),
         ('Active_Client', 'Active Client'),
-        ('Former_Client', 'Former Client'),
-        ('Partner', 'Partner'),
         ('Archived', 'Archived'),
     ]
 
@@ -40,6 +38,11 @@ class Account(BaseModel):
 
 
 class Prospect(BaseModel):
+    STATUS_CHOICES = [
+        ('Prospect', 'Prospect'),
+        ('Client', 'Active'),
+    ]
+
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, related_name="prospect")
     account = models.ForeignKey(Account, on_delete=models.SET_NULL, null=True)
@@ -48,13 +51,14 @@ class Prospect(BaseModel):
     post_title = models.CharField(max_length=50)
     email = models.EmailField()
     phone_number = PhoneNumberField(unique=True, region="FR")
+    status = models.CharField(choices=STATUS_CHOICES, max_length=50, default="Prospect")
 
 
 class Pipeline(BaseModel):
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
     step_name = models.CharField(max_length=100)
-    display_order = models.IntegerField()
-    is_closed = models.BooleanField(default=False)
+    display_order = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
+    is_closed = models.BooleanField(default=False, null=True, blank=True)
 
 
 class Opportunity(BaseModel):

@@ -21,7 +21,7 @@ class OpportunityManager(models.Manager):
     def get_admin_total_opportunity(self):
         return self.aggregate(
             total=Count('id'),
-            total_value=Sum('estimate_value')
+            total_value=Sum('estimate_value') 
         )
     
     def get_total_opportunity(self, user):

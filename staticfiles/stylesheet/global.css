@@ -2,7 +2,8 @@
 
 
 .wrapper{
-    padding: 20px;
+    margin: 20px;
+    position: relative;
 }
 
 
@@ -355,14 +356,14 @@
     margin-bottom: 20px;
 }
 
-.prospect-wrapper .search-controls {
+/* .prospect-wrapper .search-controls {
     display: flex;
     gap: 10px;
 }
 
 .prospect-wrapper .search-input {
     border-radius: 5px;
-}
+} */
 
 .prospect-wrapper .table-container {
     overflow-x: auto;
@@ -379,7 +380,46 @@
     display: flex;
     gap: 10px;
 }
-
+.col-actions .bi-three-dots{
+    font-size: 20px;
+    padding: 0 7px;
+    cursor: pointer;
+}
+.col-actions .bi-three-dots:hover{
+    color: var(--bs-text);
+}
+.dropdown{
+    position: absolute;
+    right: 0;
+    display: none;
+    transform: translateY(25px);
+    background: var(--bs-card);
+    border: 1px solid var(--bs-border);
+    border-radius: 5px;
+    text-align: left;
+    transition: transform 0.5s ease-in-out;
+}
+.toggle-dropdown{
+    display: block;
+}
+.dropdown li{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 0 10px;
+}
+.dropdown li a{
+    padding: 8px 5px;
+    text-wrap: nowrap;
+    font-size: 13px;
+}
+.dropdown li:hover{
+    background:#dadada11;
+    color: var(--bs-text);
+}
+.dropdown li:hover a{
+    color: var(--bs-text);
+}
 
 /*#########################*\
         END PROSPECT

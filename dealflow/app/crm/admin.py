@@ -1,15 +1,15 @@
 from django.contrib import admin
 
 from .models import (
-    Product,
+    Service,
     Account,
     Pipeline,
 )
 
 
-class ProductAdmin(admin.ModelAdmin):
-    list_display = ['product_name', 'price', 'description', 'created_at', 'update_at']
-    list_filter = ['product_name', 'created_at']
+class ServiceAdmin(admin.ModelAdmin):
+    list_display = ['service_name', 'price', 'description', 'created_at', 'update_at']
+    list_filter = ['service_name', 'created_at']
 
 
 class AccountAdmin(admin.ModelAdmin):
@@ -22,6 +22,6 @@ class PipelineAdmin(admin.ModelAdmin):
     list_filter = ['step_name', 'is_closed']
 
 
-admin.site.register(Product, ProductAdmin)
+admin.site.register(Service, ServiceAdmin)
 admin.site.register(Account, AccountAdmin)
 admin.site.register(Pipeline, PipelineAdmin)

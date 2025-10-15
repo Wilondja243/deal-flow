@@ -42,11 +42,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const canvasElement = document.getElementById('pipelineChart');
     const canvasElement2 = document.getElementById('activityChart');
 
-    if(canvasElement){
+    if(canvasElement ){
         chart(
             'bar',
             ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Séptembre', 'Octobre', 'Novembre', 'Décembre'],
-            [12000, 19000, 3000, 5000,12000, 19000, 3000, 5000, 12000, 19000, 3000, 5000],
+            parseActivityData,
             'Activités ',
             canvasElement
         )

@@ -33,7 +33,7 @@ class ProspectForm(forms.ModelForm):
     
     class Meta:
         model = Prospect
-        exclude = ['user', 'account']
+        exclude = ['user', 'account', 'status']
         fields = "__all__"
 
         widgets = {
@@ -53,9 +53,9 @@ class OpportunityForm(forms.ModelForm):
         fields = "__all__"
 
         widgets = {
-            "deal_name": forms.TextInput(attrs={'placeholder': "nom de l'affaire"}),
-            "estimate_value": forms.TextInput(attrs={'placeholder': "valeur estimée"}),
-            "cloture_date": forms.DateTimeInput(attrs={'placeholder': "Ex: 2-4-2055 12:44"}),
-            "probability_purcent": forms.Textarea(attrs={'placeholder': "description"})
+            "deal_name": forms.TextInput(attrs={'placeholder': "nom de l'affaire", "class": "form-control"}),
+            "estimate_value": forms.TextInput(attrs={'placeholder': "valeur estimée", "class": "form-control"}),
+            "cloture_date": forms.DateTimeInput(attrs={'placeholder': "Ex: 2025-04-02 12:44", "class": "form-control"}),
+            "probability_purcent": forms.TextInput(attrs={'placeholder': "pourcentage de probalité", "class": "form-control"})
         }
 

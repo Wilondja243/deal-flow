@@ -1,5 +1,6 @@
 {% extends "./base/base.html" %}
 
+{% load static %}
 
 {% block side_bar %}
     {% include "./base/side_bar.html" %}
@@ -26,8 +27,15 @@
         
         <div class="card kpi-card">
             <span class="card-title">Pipeline Actif</span>
-            <span class="kpi-value">{{ total_opportunity.total_value }}</span>
-            <span class="kpi-trend">↑ 12% vs Mois Dernier</span>
+            <span class="kpi-value">
+                {% if total_opportunity.total_value %}
+                {{ total_opportunity.total_value }}
+                {% else %}
+                0
+                {% endif %}
+                $
+            </span>
+            <span class="kpi-trend">↑ 12% mois Dernier</span>
         </div>
 
         {% comment %} <div class="card kpi-card">
@@ -39,13 +47,13 @@
         <div class="card kpi-card">
             <span class="card-title">Compte total</span>
             <span class="kpi-value">{{ total_account_data.total }}</span>
-            <span class="kpi-trend">3 Urgentes Aujourd'hui</span>
+            <span class="kpi-trend">1% sur le dernier mois</span>
         </div>
         
         <div class="card kpi-card">
             <span class="card-title">Total opportunités</span>
             <span class="kpi-value">{{ total_opportunity.total }}</span>
-            <span class="kpi-trend">Objectif atteint à 70%</span>
+            <span class="kpi-trend">N'ont pas été contactés depuis 10 jours</span>
         </div>
 
     </div>
@@ -65,7 +73,6 @@
                 <canvas id="activityChart"></canvas>
             </div>
         </div>
-
     </div>
 
     {% if accounts %}
@@ -124,7 +131,7 @@
         console.log(parseActivityData)
 
 
-        const DEFAULT_COLORS = [
+        {% comment %} const DEFAULT_COLORS = [
             'rgba(255, 99, 132, 0.7)',
             'rgba(54, 162, 235, 0.7)',
             'rgba(255, 206, 86, 0.7)',
@@ -188,7 +195,7 @@
                 )
             }
 
-        });
+        }); {% endcomment %}
     </script>
 
 </section>

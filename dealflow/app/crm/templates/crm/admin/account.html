@@ -69,11 +69,12 @@
                     <td class="col-name">{{ account.account_name }}</td>
                     <td>{{ account.address }}</td>
                     <td class="col-contact">
-                        {% for prospect in account.prospect.all %}
+                        {% if prospect %}
                         {{ prospect.first_name }} {{ prospect.last_name }}
-                        {% empty %}
+                        
+                        {% else %}
                         Null
-                        {% endfor %}
+                        {% endif %}
                     </td>
                     <td class="col-phone">{{ account.account_phone_number }}</td>
                     <td class="col-status">
@@ -82,7 +83,7 @@
                         </span>
                     </td>
                     <td class="col-actions">
-                        <a href="{% url 'account' %}" class="btn action-btn edit" title="Voir le compte"><i class="bi bi-eye"></i></a>
+                        {% comment %} <a href="{% url 'account' %}" class="btn action-btn edit" title="Voir le compte"><i class="bi bi-eye"></i></a> {% endcomment %}
                         <a href="{% url 'account_update' account.id %}" class="btn action-btn edit" title="Voir Fiche"><i class="bi bi-box-arrow-in-up-right"></i></a>
                         <a href="{% url 'prospect_create' account.id %}" class="btn action-btn" title="Ajouter un prospect"><i class="bi bi-plus-circle"></i></a>
                     </td>

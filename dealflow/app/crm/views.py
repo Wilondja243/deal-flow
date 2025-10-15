@@ -7,8 +7,8 @@ from django.db.models import Count
 from django.views.generic import View, CreateView, UpdateView, DeleteView, DetailView, ListView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
-from dealflow.app.crm.forms import AccountForm, ProspectForm
-from dealflow.app.crm.models import Account, Activity, Opportunity, Prospect
+from dealflow.app.crm.forms import AccountForm, OpportunityForm, ProspectForm
+from dealflow.app.crm.models import Account, Activity, Opportunity, Pipeline, Prospect
 
 
 class DashboardView(LoginRequiredMixin, ListView):
@@ -70,7 +70,12 @@ class AccountView(LoginRequiredMixin, View):
 
     def get(self, request):
         accounts = Account.objects.filter(user=request.user)
-        return render(request, self.template_name, {'accounts': accounts})
+        prospect = None
+
+        for account in accounts:
+            prospect = Prospect.objects.filter(account=account)
+            print("prospect : ", prospect)
+        return render(request, self.template_name, {'accounts': accounts, 'prospect': prospect})
     
 
 class AccountCreateView(LoginRequiredMixin, CreateView):
@@ -166,18 +171,54 @@ class ProspectDeleteView(LoginRequiredMixin, DeleteView):
         return message
     
 
-class ProductView(LoginRequiredMixin, View):
-    template_name = "crm/product.html"
+class ServiceView(LoginRequiredMixin, View):
+    template_name = "crm/service.html"
 
     def get(self, request):
         return render(request, self.template_name)
     
 
-class OpportunityView(LoginRequiredMixin, View):
+class OpportunityView(LoginRequiredMixin, ListView):
     template_name = "crm/opportunity.html"
+    context_object_name = 'opportunities'
+    
+    def get_queryset(self):
+        if self.request.user.role.upper() == "ADMIN":
+            return Opportunity.objects.all()
+        else:
+            return Opportunity.objects.filter(user=self.request.user)
+    
 
-    def get(self, request):
-        return render(request, self.template_name)
+class OpportunityCreateView(LoginRequiredMixin, CreateView):
+    model = Opportunity
+    form_class = OpportunityForm
+    template_name = "crm/opportunity_form.html"
+    success_url = reverse_lazy("opportunity")
+    
+    def form_valid(self, form):
+        prospect_pk = self.kwargs.get('pk')
+        prospect = get_object_or_404(Prospect, pk=prospect_pk)
+        print("prospect : ", prospect.account.id)
+        account = get_object_or_404(Account, pk=prospect.account.id)
+
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        self.object.account = account
+        self.object.prospect = prospect
+
+        try:
+            initial_step = get_object_or_404(Pipeline, step_name="Qualification")
+        except Pipeline.DoesNotExist:
+            messages.error(self.request, "Erreur : L'étape de pipeline initiale 'Qualification' n'a pas été trouvée. Veuillez contacter l'administrateur.")
+            return self.form_invalid(form)
+        
+        self.object.pipeline = initial_step
+
+        self.object.save()
+
+        messages.success(self.request, f"Opportunité à été crée avec success sur le compte {self.object.account.account_name}")
+
+        return super().form_valid(form)
     
 
 class ActivityView(LoginRequiredMixin, View):
