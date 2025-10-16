@@ -133,15 +133,3 @@ label {
 .tab-button[data-type="task"].active i { color: var(--task-color); }
 .tab-button[data-type="email"].active i { color: var(--email-color); }
 
-.call-outcome-row {
-    display: none;
-}
-
-.email-subject-row {
-    display: none;
-}
-
-/* Petite astuce CSS pour simuler l'affichage d'un type par défaut (Tâche ici) */
-.form-container form:not([data-active-type="task"]) .task-date-row { display: none; }
-.form-container form:not([data-active-type="call"]) .call-outcome-row { display: none; }
-.form-container form:not([data-active-type="email"]) .email-subject-row { display: none; }

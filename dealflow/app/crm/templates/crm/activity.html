@@ -14,34 +14,16 @@
 
 
 <div class="activities-wrapper wrapper">
+
+    {% if messages %}
+    {% for message in messages %}
+        <div class="success">{{ message }}</div>
+    {% endfor %}
+    {% endif %}
+
     <h1><i class="bi bi-calendar3"></i> Historique des activités</h1>
 
     {% if activities %}
-
-    <header class="list-header-actions">
-        
-        <div class="search-controls">
-            <input type="text" class="search-input" placeholder="Rechercher par description...">
-            
-            <select class="form-select">
-                <option selected>Type : Tous</option>
-                <option>Appel</option>
-                <option>Tâche</option>
-                <option>Email</option>
-            </select>
-            
-            <select class="form-select">
-                <option selected>Statut : À Faire</option>
-                <option>Statut : Terminées</option>
-            </select>
-        </div>
-
-        <div class="actions">
-            <a href="{% url 'activity_create' %}" class="btn btn-primary new-activity-btn">
-                <i class="bi bi-plus-lg"></i> Nouvelle Activité
-            </a>
-        </div>
-    </header>
 
     <div class="table-container">
         <table class="activities-table">
@@ -50,7 +32,7 @@
                     <th>Date & Heure</th>
                     <th>Type</th>
                     <th>Description</th>
-                    <th>Lié à (Affaire/Contact)</th>
+                    <th>Prospect</th>
                     <th>Commercial</th>
                     <th>Statut</th>
                     <th>Actions</th>
@@ -61,16 +43,23 @@
                 {% for activity in activities %}
 
                 <tr>
-                    <td>15/10/2025 à 10h00</td>
+                    <td>{{ activity.created_at }}</td>
                     <td class="col-type">
                         <i class="bi bi-check2-square activity-type-icon type-task"></i> Tâche
                     </td>
-                    <td>Préparer la proposition pour Alpha Corp.</td>
-                    <td class="col-link"><a href="#">Alpha Corp Solutions</a></td>
+                    <td>
+                        {% if activity.description_note %}
+                        {{ activity.description_note }}
+                        {% else %}
+                        Null
+                        {% endif %}
+                    </td>
+                    <td class="col-link"><a href="#">{{ activity.prospect.first_name }} {{ activity.prospect.last_name }}</a></td>
                     <td>Jean Dupont</td>
-                    <td><span class="status-badge status-pending">En Cours</span></td>
+                    <td><span class="status-badge status-pending">{{ activity.status }}</span></td>
                     <td class="col-actions">
-                        <button class="btn action-btn" title="Marquer Terminé"><i class="bi bi-check-circle"></i></button>
+                        <a href="{% url 'activity_update' activity.id %}" class="btn action-btn edit" title="Modifer"><i class="bi bi-box-arrow-in-up-right"></i></a>
+                        <a href="{% url 'activity_delete' activity.id %}" class="btn action-btn delete" title="Supprimer"><i class="bi bi-trash"></i></a>
                     </td>
                 </tr>
 

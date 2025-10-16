@@ -13,6 +13,13 @@
 {% block content %}
 
 <div class="products-wrapper wrapper">
+
+    {% if messages %}
+    {% for message in messages %}
+        <div class="success">{{ message }}</div>
+    {% endfor %}
+    {% endif %}
+
     <h1><i class="bi bi-box-seam"></i> Services</h1>
 
     <header class="list-header-actions">

@@ -23,45 +23,45 @@
             <div class="form-group">
                 <label for="account-name">Nom de l'Entreprise <span style="color: red;">*</span></label>
                 {{ form.account_name }}
-                <div class="field_error">{{ form.account_name.erros }}</div>
+                <div class="field-error">{{ form.account_name.erros }}</div>
             </div>
             <div class="form-group">
                 <label for="account-website">Site Web</label>
                 {{ form.web_site }}
-                <div class="field_error">{{ form.web_site.errors }}</div>
+                <div class="field-error">{{ form.web_site.errors }}</div>
             </div>
         </div>
 
         <div class="form-row">
             <div class="form-group">
-                <label for="account-phone">Téléphone Principal</label>
+                <label for="account-phone">Téléphone Principal <span style="color: red;">*</span></label>
                 {{ form.account_phone_number }}
                 <div style="color: var(--bs-text-red);font-size: 0.8em">{{ form.account_phone_number.errors }}</div>
             </div>
             <div class="form-group">
-                <label for="account-industry">Secteur d'Activité</label>
+                <label for="account-industry">Secteur d'Activité <span style="color: red;">*</span></label>
                 {{ form.activity_sector }}
-                <div class="field_error">{{ form.activity_sector.errors }}</div>
+                <div class="field-error">{{ form.activity_sector.errors }}</div>
             </div>
         </div>
         
         <div class="form-row">
             <div class="form-group">
-                <label for="account-city">Ville</label>
+                <label for="account-city">Ville <span style="color: red;">*</span></label>
                 {{ form.address }}
-                <div class="field_error">{{ form.address.errors }}</div>
+                <div class="field-error">{{ form.address.errors }}</div>
             </div>
             <div class="form-group">
-                <label for="account-zip">Code Postal</label>
+                <label for="account-zip">Code Postal <span style="color: red;">*</span></label>
                 {{ form.postal_code }}
-                <div class="field_error">{{ form.postal_code.errors }}</div>
+                <div class="field-error">{{ form.postal_code.errors }}</div>
             </div>
         </div>
         
         <div class="form-group">
             <label for="account-notes">Notes / Description du Compte</label>
             {{ form.description }}
-            <div>{{ form.description.errors }}</div>
+            <div class="field-error">{{ form.description.errors }}</div>
         </div>
 
         <div class="form-actions">

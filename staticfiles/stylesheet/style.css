@@ -168,11 +168,16 @@ table tbody tr:last-child td {
 /* message */
 .success{
     color: var(--bs-text);
-    background: rgba(0, 255, 76, 0.048);
+    background: var(--bs-text-green-hover);
     border: 1px solid var(--bs-border);
-    border-radius: 5px;
+    border-radius: 2px;
     margin-bottom: 30px;
-    padding: 10px 5px;
+    padding: 20px 10px;
+}
+
+.field-error{
+    color: var(--bs-text-red);
+    font-size: 0.8em;
 }
 
 

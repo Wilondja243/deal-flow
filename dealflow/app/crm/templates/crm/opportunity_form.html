@@ -22,12 +22,12 @@
             <div class="form-group">
                 <label for="prospect-first-name">Nom d'affaire <span style="color: red;">*</span></label>
                 {{ form.deal_name }}
-                <div>{{ form.deal_name.errors }}</div>
+                <div class="field-error">{{ form.deal_name.errors }}</div>
             </div>
             <div class="form-group">
                 <label for="prospect-last-name">Valeur estimée <span style="color: red;">*</span></label>
                 {{ form.estimate_value }}
-                <div style="color: var(--bs-text-red)">{{ form.last_name.errors }}</div>
+                <div style="field-error">{{ form.last_name.errors }}</div>
             </div>
         </div>
 
@@ -35,12 +35,12 @@
             <div class="form-group">
                 <label for="prospect-email">Brobabilité en pourcentage <span style="color: red;">*</span></label>
                 {{ form.probability_purcent }}
-                <div style="color:var(--bs-text-red)">{{ form.probability_purcent.errors }}</div>
+                <div style="field-error">{{ form.probability_purcent.errors }}</div>
             </div>
             <div class="form-group">
                 <label for="prospect-title">Date de clotûre</label>
                 {{ form.cloture_date }}
-                <div style="color:var(--bs-text-red)">{{ form.cloture_date.errors }}</div>
+                <div style="field-error">{{ form.cloture_date.errors }}</div>
             </div>
         </div>
 

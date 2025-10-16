@@ -39,7 +39,7 @@ class ActivityManager(models.Manager):
         ).annotate(month=ExtractMonth("created_at")).values('month').annotate(
             total=Count('id')
         )
-        total_activity = {item['month']: item['total_activities'] for item in activity_data}
+        total_activity = {item['month']: item['total'] for item in activity_data}
 
         return total_activity
     
@@ -50,7 +50,7 @@ class ActivityManager(models.Manager):
         ).annotate(month=ExtractMonth("created_at")).values('month').annotate(
             total=Count('id')
         )
-        total_activity = {item['month']: item['total_activities'] for item in activity_data}
+        total_activity = {item['month']: item['total'] for item in activity_data}
 
         return total_activity
     

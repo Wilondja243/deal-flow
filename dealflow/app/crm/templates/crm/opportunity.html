@@ -46,11 +46,11 @@
     {% if opportunities %}
 
     <div class="pipeline-container">
-
-        {% for opportunity in opportunities %}
-        
         <div class="pipeline-column" data-stage-id="1">
-            <div class="opportunity-card qualification" data-opportunity-id="101">
+
+            {% for opportunity in opportunities %}
+
+            <div class="opportunity-card qualification" data-opportunity-id={{ opportunity.id }}>
                 <a href="#" class="deal-name">{{ opportunity.deal_name }}</a>
                 <p class="deal-value">{{ opportunity.estimate_value}} $</p>
                 <p class="deal-account"><i class="bi bi-building"></i> {{ opportunity.account.account_name }}</p>
@@ -66,11 +66,17 @@
                         En cour...
                     </span>
                 {% endif %}
+
+                <div class="opportunity-actions">
+                    <a href="{% url 'activity_create' opportunity.id %}" class="btn-secondary add"><i class="bi bi-plus-circle-fill"></i></a>
+                    <a href="{% url 'opportunity_update' opportunity.id %}" class="btn-secondary edit"><i class="bi bi-pencil-square"></i></a>
+                    <a href="{% url 'opportunity_delete' opportunity.id %}" class="btn-secondary delete"><i class="bi bi-trash-fill"></i></a>
+                </div>
             </div>
+            
+            {% endfor %}
+
         </div>
-
-        {% endfor %}
-
     </div>
 
     {% else %}

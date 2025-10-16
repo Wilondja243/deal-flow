@@ -27,7 +27,7 @@ class Account(BaseModel):
     account_name = models.CharField(max_length=50)
     address = models.CharField(max_length=100)
     activity_sector = models.CharField(max_length=150)
-    description = models.TextField()
+    description = models.TextField(null=True, blank=True)
     account_phone_number = PhoneNumberField(unique=True, region="FR")
     web_site = models.URLField(null=True, blank=True)
     postal_code = models.CharField(max_length=100)
@@ -45,7 +45,7 @@ class Prospect(BaseModel):
 
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, related_name="prospect")
-    account = models.ForeignKey(Account, on_delete=models.SET_NULL, null=True)
+    account = models.ForeignKey(Account, on_delete=models.SET_NULL, null=True, related_name="prospect")
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     post_title = models.CharField(max_length=50)
@@ -66,6 +66,7 @@ class Opportunity(BaseModel):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     account = models.ForeignKey(Account, on_delete=models.CASCADE)
     pipeline = models.ForeignKey(Pipeline, on_delete=models.CASCADE)
+    prospect = models.ForeignKey(Prospect, on_delete=models.SET_NULL, null=True)
     deal_name = models.CharField(max_length=100)
     estimate_value = models.DecimalField(max_digits=8, decimal_places=2)
     cloture_date = models.DateTimeField(null=True, blank=True)
@@ -76,12 +77,20 @@ class Opportunity(BaseModel):
 
 
 class Activity(BaseModel):
+    RESULT_CHOICES = [
+        ("SCHEDULED", "Planifié / À venir"),
+        ("COMPLETED_SUCCESS", "Terminé / Réussi"),
+        ("NO_RESPONSE", "Pas de réponse / Message envoyé"),
+        ("COMPLETED_FAILED", "Terminé / Non abouti"),
+    ]
+
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     prospect = models.ForeignKey(Prospect, on_delete=models.CASCADE)
     opportunity = models.ForeignKey(Opportunity, on_delete=models.CASCADE)
     activity_type = models.CharField(max_length=50)
-    description_note = models.TextField()
+    status = models.CharField(max_length=50, choices=RESULT_CHOICES, default="SCHEDULED")
+    description_note = models.TextField(null=True, blank=True)
     is_finished = models.BooleanField(default=False)
 
     objects = ActivityManager()

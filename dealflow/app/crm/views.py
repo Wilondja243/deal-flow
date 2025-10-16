@@ -1,5 +1,4 @@
 import json
-from datetime import date
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse_lazy
 from django.contrib import messages
@@ -7,7 +6,7 @@ from django.db.models import Count
 from django.views.generic import View, CreateView, UpdateView, DeleteView, DetailView, ListView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
-from dealflow.app.crm.forms import AccountForm, OpportunityForm, ProspectForm
+from dealflow.app.crm.forms import AccountForm, OpportunityForm, ProspectForm, ActivityForm
 from dealflow.app.crm.models import Account, Activity, Opportunity, Pipeline, Prospect
 
 
@@ -41,8 +40,6 @@ class DashboardView(LoginRequiredMixin, ListView):
         order_activity_data = []
         for month in range(1, 13):
             order_activity_data.append(total_activity.get(month, 0))
-
-        print(total_opportunity)
             
         context["activity_data"] = json.dumps(order_activity_data)
         context["total_account_data"] = total_account_data
@@ -60,8 +57,7 @@ class AdminAccountView(LoginRequiredMixin, UserPassesTestMixin, View):
         return self.request.user.role.upper() == 'ADMIN'
 
     def get(self, request):
-        accounts = Account.objects.all()
-        print(accounts)
+        accounts = Account.objects.all().prefetch_related("prospect")
         return render(request, self.template_name, {'admin_accounts': accounts})
     
 
@@ -69,13 +65,8 @@ class AccountView(LoginRequiredMixin, View):
     template_name = "crm/account.html"
 
     def get(self, request):
-        accounts = Account.objects.filter(user=request.user)
-        prospect = None
-
-        for account in accounts:
-            prospect = Prospect.objects.filter(account=account)
-            print("prospect : ", prospect)
-        return render(request, self.template_name, {'accounts': accounts, 'prospect': prospect})
+        accounts = Account.objects.filter(user=request.user).prefetch_related("prospect")
+        return render(request, self.template_name, {'accounts': accounts})
     
 
 class AccountCreateView(LoginRequiredMixin, CreateView):
@@ -166,9 +157,8 @@ class ProspectDeleteView(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy("prospect")
 
     def delete(self, request, *args, **kwargs):
-        message = super().delete(request, *args, **kwargs)
         messages.success(request, f"Prospect supprimé avec success.")
-        return message
+        return super().delete(request, *args, **kwargs)
     
 
 class ServiceView(LoginRequiredMixin, View):
@@ -198,7 +188,6 @@ class OpportunityCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         prospect_pk = self.kwargs.get('pk')
         prospect = get_object_or_404(Prospect, pk=prospect_pk)
-        print("prospect : ", prospect.account.id)
         account = get_object_or_404(Account, pk=prospect.account.id)
 
         self.object = form.save(commit=False)
@@ -221,16 +210,73 @@ class OpportunityCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
     
 
-class ActivityView(LoginRequiredMixin, View):
-    template_name = "crm/activity.html"
+class OpportunityUpdateView(LoginRequiredMixin, UpdateView):
+    model = Opportunity
+    form_class = OpportunityForm
+    template_name = "crm/opportunity_form.html"
+    success_url = reverse_lazy("opportunity")
 
-    def get(self, request):
-        activities = Activity.objects.filter(user=request.user)
-        return render(request, self.template_name, {'activities': activities})
+    def form_valid(self, form):
+        messages.success(self.request, "Opportunité modifié avec succès.")
+        return super().form_valid(form)
     
 
-class ActivityCreateView(LoginRequiredMixin, View):
-    template_name = "crm/activity_form.html"
+class OpportunityDeleteView(LoginRequiredMixin, DeleteView):
+    model = Opportunity
+    template_name = "crm/opportunity_delete.html"
+    success_url = reverse_lazy("opportunity")
 
-    def get(self, request):
-        return render(request, self.template_name)
+    def delete(self, request, *args, **kwargs):
+        messages.success(request, f"Opporturnité supprimé avec success.")
+        return super().delete(request, *args, **kwargs)
+    
+
+class ActivityView(LoginRequiredMixin, ListView):
+    template_name = "crm/activity.html"
+    context_object_name = "activities"
+
+    def get_queryset(self):
+        if self.request.user.role.upper() == "ADMIN":
+            return Activity.objects.all()
+        else:
+            return Activity.objects.filter(user=self.request.user)
+    
+
+class ActivityCreateView(LoginRequiredMixin, CreateView):
+    model = Activity
+    form_class = ActivityForm
+    template_name = "crm/activity_form.html"
+    success_url = reverse_lazy("activity")
+
+    def form_valid(self, form):
+        opportunity_id = self.kwargs.get("opportunity_id")
+        opportunity = get_object_or_404(Opportunity, id=opportunity_id)
+        prospect = opportunity.prospect
+
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        self.object.prospect = prospect
+        self.object.opportunity = opportunity
+
+        return super().form_valid(form)
+
+    
+class ActivityUpdateView(LoginRequiredMixin, UpdateView):
+    model = Activity
+    form_class = ActivityForm
+    template_name = "crm/activity_form.html"
+    success_url = reverse_lazy("activity")
+
+    def form_valid(self, form):
+        messages.success(self.request, "Activité modifiée avec succès.")
+        return super().form_valid(form)
+    
+
+class ActivityDeleteView(LoginRequiredMixin, DeleteView):
+    model = Activity
+    template_name = "crm/activity_delete.html"
+    success_url = reverse_lazy("activity")
+
+    def delete(self, request, *args, **kwargs):
+        messages.success(request, f"Activité supprimé avec success.")
+        return super().delete(request, *args, **kwargs)

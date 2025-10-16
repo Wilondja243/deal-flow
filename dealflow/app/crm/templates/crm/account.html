@@ -80,11 +80,14 @@
                     <td class="col-name">{{ account.account_name }}</td>
                     <td>{{ account.address }}</td>
                     <td class="col-contact">
-                        {% for prospect in account.prospect.all %}
-                        {{ prospect.first_name }} {{ prospect.last_name }}
-                        {% empty %}
-                        Null
-                        {% endfor %}
+                        {% with first_prospect=account.prospect.all.0 %}
+                            {% if first_prospect %}
+                                {{ first_prospect.first_name }} {{ first_prospect.last_name }}
+                            
+                            {% else %}
+                            Null
+                            {% endif %}
+                        {% endwith %}
                     </td>
                     <td class="col-phone">{{ account.account_phone_number }}</td>
                     <td class="col-status">
@@ -107,7 +110,7 @@
     {% else %}
         <div style="text-align: center;margin: 2em 0;color: var(--bs-text-muted);border: 1px solid var(--bs-border);border-radius: 5px; padding: 30px 10px;">
             <i class="bi bi-building" style="font-size: 50px;"></i>
-            <p>Aucun compte disponible pour le moment</p> 
+            <p>Aucun compte disponible.</p> 
         </div>
     {% endif %}
 

@@ -295,11 +295,12 @@
     margin-bottom: 15px;
     cursor: grab; 
     transition: all 0.2s ease-in-out;
+    position: relative;
 }
 
 .opportunity-card:hover {
     transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.315);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.062);
 }
 
 
@@ -337,6 +338,23 @@
     margin-top: 10px;
     display: block;
 }
+
+.opportunity-actions{
+    position: absolute;
+    right: 1em;
+    bottom: 1.5em;
+    display: none;
+}
+.opportunity-card:hover .opportunity-actions{
+    display: block;
+}
+.opportunity-actions a{
+    padding: 5px 5px;
+    color: var(--bs-text-muted);
+}
+.opportunity-actions .add:hover{color: var(--bs-text);}
+.opportunity-actions .edit:hover{color: var(--bs-text-green);}
+.opportunity-actions .delete:hover{color: var(--bs-text-red);}
 
 
 /*###########################*\
